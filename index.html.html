@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commune Fitness | Premier Gym & Luxury Fitness Center Kataka</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Three.js for 3D Hero Effect -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            overflow-x: hidden;
+        }
+
+        /* Dark & Light Theme Base Colors */
+        .dark body {
+            background-color: #08080a;
+            color: #f3f4f6;
+        }
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #d97706, #f59e0b, #b45309);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-bg {
+            background: linear-gradient(135deg, #d97706, #f59e0b, #fbbf24);
+        }
+
+        .gold-glow {
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);
+        }
+
+        /* Theme-Adaptive Glassmorphism */
+        .dark .card-glass {
+            background: rgba(18, 18, 24, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .card-glass {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Logo Animations */
+        @keyframes logoFadeInUp {
+            0% { opacity: 0; transform: translateY(100px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes silverLightSweep {
+            0% { transform: translateX(-100%) rotate(25deg); }
+            20% { transform: translateX(200%) rotate(25deg); }
+            100% { transform: translateX(200%) rotate(25deg); }
+        }
+        @keyframes horizontalSweep {
+            0% { transform: translateX(-100%); opacity: 0;}
+            50% { opacity: 1; }
+            100% { transform: translateX(100vw); opacity: 0;}
+        }
+        .animate-logo-load {
+            animation: logoFadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .silver-sweep-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .silver-sweep-container::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.15),
+                transparent
+            );
+            transform: translateX(-100%) rotate(25deg);
+            animation: silverLightSweep 7s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        /* Hero Image Zoom & Tilt */
+        @keyframes floatTiltZoom {
+            0% { transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) scale(1.02); }
+            50% { transform: perspective(1000px) rotateX(-2deg) rotateY(2deg) scale(1.08); }
+            100% { transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) scale(1.02); }
+        }
+        .hero-zoom-img {
+            animation: floatTiltZoom 10s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        .cinematic-line {
+            position: absolute;
+            height: 1px;
+            width: 300px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+            animation: horizontalSweep 8s linear infinite;
+            z-index: 10;
+        }
+
+        /* Animated Developer Footer */
+        .dark .sk-das-badge {
+            background: linear-gradient(90deg, #111827, #1f2937, #111827);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+        }
+        .sk-das-badge {
+            background: linear-gradient(90deg, #ffffff, #f1f5f9, #ffffff);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .sk-das-badge:hover {
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.5);
+            border-color: #f59e0b;
+            transform: translateY(-3px);
+        }
+
+        /* Pulse animation for WhatsApp */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+        .whatsapp-float {
+            animation: pulse-ring 2s infinite;
+        }
+
+        /* Interactive Constellation Canvas */
+        .interactive-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Infinite Horizontal Gallery Scrolling */
+        .marquee-container {
+            display: flex;
+            overflow: hidden;
+            user-select: none;
+            gap: 1.5rem;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        .marquee-content {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-around;
+            gap: 1.5rem;
+            min-width: 100%;
+            animation: scroll-left 35s linear infinite;
+        }
+        .marquee-container:hover .marquee-content {
+            animation-play-state: paused;
+        }
+        @keyframes scroll-left {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #08080a;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d97706;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-yellow-500 selection:text-black relative">
+
+    <!-- 3D Canvas Background for Hero Section -->
+    <div id="canvas-container" class="absolute top-0 left-0 w-full h-[100vh] pointer-events-none z-0 opacity-40 dark:opacity-40"></div>
+
+    <!-- Header Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 card-glass border-b border-gray-200 dark:border-gray-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group animate-logo-load">
+                <div class="silver-sweep-container relative rounded-xl overflow-hidden shadow-lg gold-glow group-hover:scale-105 transition-transform bg-white/95 p-2 flex items-center justify-center">
+                    <img src="1.png" alt="Commune Fitness Logo" class="h-10 w-auto object-contain" />
+                </div>
+            </a>
+            
+            <div class="hidden md:flex items-center gap-8 text-sm font-semibold tracking-wide text-slate-700 dark:text-gray-300">
+                <!-- Redirects strictly to First Page / Hero Section -->
+                <a href="#hero" class="hover:text-yellow-500 transition-colors">About</a>
+                <a href="#features" class="hover:text-yellow-500 transition-colors">Facilities</a>
+                <a href="#pricing" class="hover:text-yellow-500 transition-colors">Membership Pricing</a>
+                <a href="#calculator" class="hover:text-yellow-500 transition-colors">BMI Calc</a>
+                <a href="#gallery" class="hover:text-yellow-500 transition-colors">Gallery</a>
+                <a href="#reviews" class="hover:text-yellow-500 transition-colors">Reviews</a>
+                <a href="#contact" class="hover:text-yellow-500 transition-colors">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="p-2.5 rounded-xl card-glass border border-gray-300 dark:border-gray-700 text-slate-800 dark:text-yellow-400 hover:scale-105 transition-all flex items-center justify-center">
+                    <i id="theme-toggle-dark-icon" data-lucide="moon" class="w-5 h-5 hidden"></i>
+                    <i id="theme-toggle-light-icon" data-lucide="sun" class="w-5 h-5 hidden"></i>
+                </button>
+
+                <a href="tel:09938581222" class="gold-bg text-black font-extrabold px-5 py-2.5 rounded-xl hover:scale-105 transition-all flex items-center gap-2 shadow-lg gold-glow text-sm">
+                    <i data-lucide="phone" class="w-4 h-4"></i> <span class="hidden sm:inline">Call Now</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden z-10">
+        <!-- Cinematic Scrolling Line Effect -->
+        <div class="cinematic-line top-1/4"></div>
+        <div class="cinematic-line top-3/4" style="animation-delay: 4s; animation-duration: 10s;"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 text-center lg:text-left z-20">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full card-glass border border-yellow-500/40 text-yellow-600 dark:text-yellow-400 text-xs sm:text-sm font-semibold">
+                        <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-500"></i> 5.0 Rated Gym in Kataka • Rex Plaza 4th Floor
+                    </div>
+                    <div class="flex justify-center lg:justify-start">
+                        <div class="relative group animate-bounce duration-1000">
+                            <div class="absolute -inset-1 custom-bg rounded-2xl blur-lg opacity-40"></div>
+                            <div class="relative card-glass p-4 rounded-2xl border border-[#85583D]/30 flex items-center gap-4">
+                                <div class="w-16 h-16 rounded-xl custom-bg flex items-center justify-center text-white font-black text-3xl shadow-xl custom-glow">
+                                    <img src="1.png" alt="Commune Fitness Logo" class="h-10 w-auto object-contain" />
+                                </div>
+                                <div class="text-left">
+                                    <h2 class="text-2xl font-black uppercase tracking-wider text-[#85583D] dark:text-[#FFFFFF]">Commune Fitness</h2>
+                                    <p class="text-xs font-bold tracking-widest text-[#D5BCA6] uppercase">Rex Plaza, 4th Floor, Kataka</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-none text-slate-900 dark:text-white">
+                        FORGE YOUR <br/>
+                        <span class="gold-gradient-text">ULTIMATE SELF</span>
+                    </h1>
+                    <p class="text-slate-600 dark:text-gray-400 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Step into Kataka's most elite fitness destination. Featuring heavy-duty Life Fitness equipment, personal coaching, dedicated steam/sauna recovery, and an unmatchable workout atmosphere.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+                        <a href="https://wa.me/919938581222?text=Hi%20Commune%20Fitness,%20I%20want%20to%20join%20the%20gym!" target="_blank" class="gold-bg text-black font-extrabold px-8 py-4 rounded-xl hover:scale-105 transition-all text-center flex items-center justify-center gap-2 shadow-lg gold-glow">
+                            <i data-lucide="zap" class="w-5 h-5"></i> Join Gym Today
+                        </a>
+                        <a href="https://maps.google.com/?q=Commune+Fitness+Rex+Plaza+Kataka" target="_blank" class="card-glass text-slate-900 dark:text-white font-bold px-8 py-4 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-all text-center flex items-center justify-center gap-2 border border-gray-300 dark:border-white/10">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-yellow-500"></i> Location & Route
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Floating Card Stack Hero with Tilt Motion -->
+                <div class="relative group z-20">
+                    <div class="absolute -inset-1 gold-bg rounded-3xl blur-2xl opacity-30 group-hover:opacity-50 transition duration-1000"></div>
+                    <div class="relative rounded-3xl overflow-hidden card-glass border border-gray-200 dark:border-white/10 p-2 shadow-2xl hero-zoom-img silver-sweep-container">
+                    <img src="2.png" 
+                    alt="Commune Fitness Signage" 
+                    class="w-full h-[380px] sm:h-[460px] object-cover rounded-2xl filter brightness-105 dark:brightness-100 transition duration-700">
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
+                            <h2 class="text-3xl sm:text-4xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-gray-200 via-white to-gray-400 drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)] uppercase">
+                                COMMUNE FITNESS
+                            </h2>
+                        </div>
+                        <div class="absolute top-6 right-6 card-glass px-4 py-2 rounded-xl border border-white/20 flex items-center gap-2 shadow-xl">
+                            <div class="w-2.5 h-2.5 rounded-full bg-green-500 animate-ping"></div>
+                            <span class="text-xs font-bold text-white uppercase tracking-wider">Rex Plaza</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Highlights / Stats Bar -->
+    <section class="py-10 border-y border-gray-200 dark:border-gray-800/80 bg-slate-100/60 dark:bg-black/40 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="space-y-1">
+                    <h3 class="text-3xl sm:text-4xl font-black gold-gradient-text">5.0 ★</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-xs sm:text-sm font-medium">Google Rating</p>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="text-3xl sm:text-4xl font-black gold-gradient-text">4th Floor</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-xs sm:text-sm font-medium">Rex Plaza, Kataka</p>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="text-3xl sm:text-4xl font-black gold-gradient-text">Pro Level</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-xs sm:text-sm font-medium">Life Fitness Machines</p>
+                </div>
+                <div class="space-y-1">
+                    <h3 class="text-3xl sm:text-4xl font-black gold-gradient-text">Steam / Sauna</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-xs sm:text-sm font-medium">Recovery Suite</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facilities Section -->
+    <section id="features" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs uppercase tracking-widest font-extrabold text-yellow-500 mb-2">Why Choose Us</h2>
+                <p class="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white">WORLD CLASS FACILITIES</p>
+            </div>
+
+            <!-- Large Cinematic Visuals -->
+            <div class="mb-20 relative group rounded-3xl overflow-hidden card-glass border border-white/10 p-3 shadow-2xl silver-sweep-container">
+                <div class="absolute -inset-1 gold-bg rounded-3xl blur-2xl opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                <div class="relative rounded-2xl overflow-hidden h-[350px] sm:h-[450px]">
+                    <img src="3.png" alt="Commune Fitness Club Architecture" class="w-full h-full object-cover group-hover:scale-105 transition duration-1000">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-8">
+                        <span class="text-xs gold-bg text-black font-black px-3 py-1 rounded-full uppercase tracking-widest w-max mb-3">Architectural Excellence</span>
+                        <h3 class="text-2xl sm:text-4xl font-black text-white">State-of-the-Art Luxury Training Arena</h3>
+                        <p class="text-gray-300 text-sm sm:text-base mt-2 max-w-2xl">Designed with precision wood-slat acoustics, specialized ambient lighting, and top-tier fitness ecosystems to elevate your training experience.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card-glass p-8 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-yellow-500/50 transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-xl gold-bg flex items-center justify-center text-black mb-6 gold-glow">
+                        <i data-lucide="dumbbell" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Modern Heavy Strength Zone</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">Fully stacked with high-grade dumbbells, Olympic barbells, squat racks, and cable crossover stations.</p>
+                </div>
+
+                <div class="card-glass p-8 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-yellow-500/50 transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-xl gold-bg flex items-center justify-center text-black mb-6 gold-glow">
+                        <i data-lucide="activity" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">High-Tech Cardio Deck</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">Interactive treadmills, spin bikes, and ellipticals with real-time calorie and pulse monitoring screens.</p>
+                </div>
+
+                <div class="card-glass p-8 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-yellow-500/50 transition-all duration-300 hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-xl gold-bg flex items-center justify-center text-black mb-6 gold-glow">
+                        <i data-lucide="flame" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Sauna & Steam Recovery</h3>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">Promote rapid muscle recovery, detoxicating sweat, and relaxation after intense workout sessions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREMIUM GYM ADMISSION & MEMBERSHIP PRICING SECTION -->
+    <section id="pricing" class="py-24 relative overflow-hidden bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-y border-gray-200 dark:border-gray-800">
+        <!-- Interactive Constellation Node Particle Background -->
+        <canvas id="interactive-bg" class="interactive-canvas hidden dark:block"></canvas>
+        <canvas id="interactive-bg-light" class="interactive-canvas block dark:hidden"></canvas>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border border-yellow-500/30 inline-block mb-3">
+                    Limited Time Offer
+                </span>
+                <!-- Prominent Styling applied for Light/Dark Mode -->
+                <h2 class="text-4xl sm:text-6xl font-black uppercase tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-slate-900 to-slate-500 dark:from-white dark:to-gray-300 drop-shadow-xl filter pb-2">
+                    Commune Premium Gym Rates
+                </h2>
+                <p class="text-slate-600 dark:text-gray-400 text-sm sm:text-base mt-3 font-medium">Transform your fitness with our high-end elite membership plans crafted for champions.</p>
+            </div>
+
+            <!-- Pricing Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                
+                <!-- Monthly Plan -->
+                <div class="card-glass p-8 rounded-3xl border border-gray-300 dark:border-white/10 hover:border-yellow-500/60 transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between group relative overflow-hidden bg-white/80 dark:bg-black/50">
+                    <div>
+                        <div class="text-xs font-bold text-yellow-600 dark:text-yellow-500 uppercase tracking-widest mb-1">Starter Pack</div>
+                        <h3 class="text-2xl font-black">Monthly Plan</h3>
+                        <div class="my-6">
+                            <span class="text-gray-400 line-through text-lg font-semibold mr-2">₹2,500</span>
+                            <span class="text-4xl font-black">₹2,000</span>
+                            <span class="text-xs text-yellow-600 dark:text-yellow-400 font-bold block mt-1">SAVE ₹500 INSTANTLY</span>
+                        </div>
+                        <p class="text-slate-500 dark:text-gray-400 text-xs leading-relaxed border-t border-gray-200 dark:border-white/10 pt-4">Perfect for short-term fitness targets and testing the elite equipment.</p>
+                    </div>
+                    <a href="https://wa.me/919938581222?text=Hi%20Commune%20Fitness,%20I%20want%20to%20enroll%20in%20the%20Monthly%20Plan!" target="_blank" class="mt-8 w-full py-3 rounded-xl border border-yellow-500/40 text-yellow-600 dark:text-yellow-400 font-bold text-center block group-hover:bg-yellow-500 group-hover:text-black transition-all">
+                        Claim Discount
+                    </a>
+                </div>
+
+                <!-- Quarterly Plan -->
+                <div class="card-glass p-8 rounded-3xl border border-gray-300 dark:border-white/10 hover:border-yellow-500/60 transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between group relative overflow-hidden bg-white/80 dark:bg-black/50">
+                    <div>
+                        <div class="text-xs font-bold text-yellow-600 dark:text-yellow-500 uppercase tracking-widest mb-1">3 Months Access</div>
+                        <h3 class="text-2xl font-black">Quarterly Plan</h3>
+                        <div class="my-6">
+                            <span class="text-gray-400 line-through text-lg font-semibold mr-2">₹6,000</span>
+                            <span class="text-4xl font-black">₹5,100</span>
+                            <span class="text-xs text-yellow-600 dark:text-yellow-400 font-bold block mt-1">SAVE ₹900 INSTANTLY</span>
+                        </div>
+                        <p class="text-slate-500 dark:text-gray-400 text-xs leading-relaxed border-t border-gray-200 dark:border-white/10 pt-4">Consistent training cycle for visible muscle conditioning and transformation.</p>
+                    </div>
+                    <a href="https://wa.me/919938581222?text=Hi%20Commune%20Fitness,%20I%20want%20to%20enroll%20in%20the%20Quarterly%20Plan!" target="_blank" class="mt-8 w-full py-3 rounded-xl border border-yellow-500/40 text-yellow-600 dark:text-yellow-400 font-bold text-center block group-hover:bg-yellow-500 group-hover:text-black transition-all">
+                        Claim Discount
+                    </a>
+                </div>
+
+                <!-- Half-Yearly Plan -->
+                <div class="card-glass p-8 rounded-3xl border-2 border-yellow-500 shadow-2xl gold-glow hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between relative group bg-white/90 dark:bg-black/80">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 gold-bg text-black font-black text-[10px] tracking-widest uppercase px-4 py-1 rounded-full shadow-lg">
+                        Most Popular
+                    </div>
+                    <div>
+                        <div class="text-xs font-bold text-yellow-600 dark:text-yellow-400 uppercase tracking-widest mb-1">6 Months Dedicated</div>
+                        <h3 class="text-2xl font-black">Half-Yearly</h3>
+                        <div class="my-6">
+                            <span class="text-gray-400 line-through text-lg font-semibold mr-2">₹10,000</span>
+                            <span class="text-4xl font-black text-yellow-500 dark:text-yellow-400">₹9,000</span>
+                            <span class="text-xs text-green-600 dark:text-green-400 font-bold block mt-1">SAVE ₹1,000 INSTANTLY</span>
+                        </div>
+                        <p class="text-slate-500 dark:text-gray-300 text-xs leading-relaxed border-t border-gray-200 dark:border-white/10 pt-4">Full lifestyle shift with complete access to group classes & recovery sessions.</p>
+                    </div>
+                    <a href="https://wa.me/919938581222?text=Hi%20Commune%20Fitness,%20I%20want%20to%20enroll%20in%20the%20Half-Yearly%20Plan!" target="_blank" class="mt-8 w-full py-3 rounded-xl gold-bg text-black font-extrabold text-center block shadow-lg hover:scale-105 transition-all">
+                        Claim VIP Offer
+                    </a>
+                </div>
+
+                <!-- Yearly Plan -->
+                <div class="card-glass p-8 rounded-3xl border border-gray-300 dark:border-white/10 hover:border-yellow-500/60 transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between group relative overflow-hidden bg-white/80 dark:bg-black/50">
+                    <div>
+                        <div class="text-xs font-bold text-yellow-600 dark:text-yellow-500 uppercase tracking-widest mb-1">12 Months Ultimate</div>
+                        <h3 class="text-2xl font-black">Yearly Pass</h3>
+                        <div class="my-6">
+                            <span class="text-gray-400 line-through text-lg font-semibold mr-2">₹18,000</span>
+                            <span class="text-4xl font-black">₹16,200</span>
+                            <span class="text-xs text-yellow-600 dark:text-yellow-400 font-bold block mt-1">SAVE ₹1,800 INSTANTLY</span>
+                        </div>
+                        <p class="text-slate-500 dark:text-gray-400 text-xs leading-relaxed border-t border-gray-200 dark:border-white/10 pt-4">Maximum value pack. VIP priority coaching, free assessment, and full perk suite.</p>
+                    </div>
+                    <a href="https://wa.me/919938581222?text=Hi%20Commune%20Fitness,%20I%20want%20to%20enroll%20in%20the%20Yearly%20Plan!" target="_blank" class="mt-8 w-full py-3 rounded-xl border border-yellow-500/40 text-yellow-600 dark:text-yellow-400 font-bold text-center block group-hover:bg-yellow-500 group-hover:text-black transition-all">
+                        Claim Discount
+                    </a>
+                </div>
+            </div>
+
+            <!-- Included Facilities Bar -->
+            <div class="card-glass rounded-3xl p-8 border border-gray-200 dark:border-white/10 bg-white/60 dark:bg-black/40">
+                <h4 class="text-center font-bold text-lg text-yellow-600 dark:text-yellow-400 mb-6 uppercase tracking-wider">Included Free With Every Membership Plan</h4>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                    <div class="p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 flex flex-col items-center justify-center">
+                        <i data-lucide="award" class="w-8 h-8 text-yellow-500 mb-2"></i>
+                        <span class="font-bold text-sm">Certified Trainers</span>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 flex flex-col items-center justify-center">
+                        <i data-lucide="users" class="w-8 h-8 text-yellow-500 mb-2"></i>
+                        <span class="font-bold text-sm">Zumba & Yoga Classes</span>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 flex flex-col items-center justify-center">
+                        <i data-lucide="zap" class="w-8 h-8 text-yellow-500 mb-2"></i>
+                        <span class="font-bold text-sm">CrossFit & Strength</span>
+                    </div>
+                    <div class="p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 flex flex-col items-center justify-center">
+                        <i data-lucide="shield-check" class="w-8 h-8 text-yellow-500 mb-2"></i>
+                        <span class="font-bold text-sm">Powerlifting Zone</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive BMI Calculator Section -->
+    <section id="calculator" class="py-20 bg-slate-100/50 dark:bg-black/40 border-y border-gray-200 dark:border-gray-800/80">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="card-glass p-8 sm:p-12 rounded-3xl border border-yellow-500/30 relative overflow-hidden">
+                <div class="text-center mb-10">
+                    <h2 class="text-3xl font-black text-slate-900 dark:text-white">CHECK YOUR <span class="gold-gradient-text">BMI INDEX</span></h2>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm mt-2">Calculate your Body Mass Index quickly before starting your workout journey.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-gray-300 uppercase mb-2">Weight (KG)</label>
+                        <input type="number" id="bmi-weight" placeholder="e.g. 70" class="w-full bg-slate-50 dark:bg-black/60 border border-gray-300 dark:border-gray-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-yellow-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 dark:text-gray-300 uppercase mb-2">Height (CM)</label>
+                        <input type="number" id="bmi-height" placeholder="e.g. 175" class="w-full bg-slate-50 dark:bg-black/60 border border-gray-300 dark:border-gray-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-yellow-500">
+                    </div>
+                </div>
+                <button onclick="calculateBMI()" class="w-full gold-bg text-black font-extrabold py-4 rounded-xl mt-6 hover:scale-[1.01] transition-transform gold-glow">
+                    CALCULATE NOW
+                </button>
+                <div id="bmi-result" class="hidden mt-6 p-4 rounded-xl text-center font-bold text-lg"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AUTOMATIC HORIZONTAL SCROLLING GALLERY SECTION -->
+    <section id="gallery" class="py-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+                <div>
+                    <h2 class="text-xs uppercase tracking-widest font-extrabold text-yellow-500 mb-2">Visual Tour</h2>
+                    <p class="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white">ORIGINAL GYM GALLERY</p>
+                </div>
+                <!-- Updated Redirect Link for Gallery Maps -->
+                <a href="https://www.google.com/maps/place/Commune+Fitness/@20.4686984,85.8960583,3a,75y,90t/data=!3m8!1e2!3m6!1sCIABIhDQzphCdgxllAvhCPJCyluJ!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAHRPTWm3pVGu-j4_O_73VBpffAJdxKyl8FM609zA45kLaFGNbHMQ8NglMcDn5nLnCjXaLTGEW-aymuGrM4eXjJro4bEo0Ex6F4XfSeiiM8Ks6Tjx7WMDCJkiPCCa_W2x9w192bT6Z-T8Cu6HjKoP%3Dw395-h298-k-no!7i4080!8i3072!4m9!3m8!1s0x3a190dac42593da3:0xcd0de8e5a95ee3ab!8m2!3d20.4686984!4d85.8960583!10e5!14m1!1BCgIgAQ!16s%2Fg%2F11zcp4w83_?entry=ttu&g_ep=EgoyMDI2MDgxNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="gold-bg text-black font-bold px-6 py-3 rounded-xl hover:scale-105 transition-all flex items-center gap-2 text-sm shadow-lg gold-glow z-10 relative">
+                    <i data-lucide="image" class="w-5 h-5"></i> Open Full Google Photos Gallery
+                </a>
+            </div>
+        </div>
+
+        <!-- Continuous Infinite Animated Marquee Container for Round Original Photos -->
+        <div class="marquee-container py-6">
+            <div class="marquee-content flex items-center gap-6">
+                <!-- Gallery Items 1-7 Using the requested original photos -->
+                <div class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl">
+                    <img src="3.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Heavy Duty Zone">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm text-center px-4">
+                        Main Training Floor & Equipment
+                    </div>
+                </div>
+                <div class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl">
+                    <img src="4.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Free Weight Dumbbells">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm text-center px-4">
+                        Free Weight & Pillar Detailing
+                    </div>
+                </div>
+                <div class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl">
+                    <img src="5.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Cardio Setup">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm text-center px-4">
+                        Treadmill Row & Zen Decor
+                    </div>
+                </div>
+                <div class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl">
+                    <img src="6.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Smart Tech">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm text-center px-4">
+                        Life Fitness Workout Monitoring
+                    </div>
+                </div>
+                <div class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl">
+                    <img src="7.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Tracking">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm text-center px-4">
+                        Heart Rate & Calorie Analytics
+                    </div>
+                </div>
+                <div class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl">
+                    <img src="8.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Community">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm text-center px-4">
+                        Commune Fitness Family
+                    </div>
+                </div>
+                <div class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl">
+                    <img src="9.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Location">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm text-center px-4">
+                        Rex Plaza 4th Floor
+                    </div>
+                </div>
+           </div>
+            <!-- Duplicate Set for Seamless Loop -->
+            <div class="marquee-content flex items-center gap-6" aria-hidden="true">
+                <div class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl">
+                    <img src="3.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Heavy Duty Zone">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm text-center px-4">
+                        Main Training Floor & Equipment
+                    </div>
+                </div>
+                <div class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl">
+                    <img src="4.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Free Weight Dumbbells">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm text-center px-4">
+                        Free Weight & Pillar Detailing
+                    </div>
+                </div>
+                <div class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl">
+                    <img src="5.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Cardio Setup">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm text-center px-4">
+                        Treadmill Row & Zen Decor
+                    </div>
+                </div>
+                <div class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl">
+                    <img src="6.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Smart Tech">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm text-center px-4">
+                        Life Fitness Workout Monitoring
+                    </div>
+                </div>
+                <div class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl">
+                    <img src="7.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Tracking">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm text-center px-4">
+                        Heart Rate & Calorie Analytics
+                    </div>
+                </div>
+                <div class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl">
+                    <img src="8.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Community">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm text-center px-4">
+                        Commune Fitness Family
+                    </div>
+                </div>
+                <div class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl">
+                    <img src="9.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Location">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white font-bold text-sm text-center px-4">
+                        Rex Plaza 4th Floor
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Google Map Reviews Section (Trending Scrolling / Looping Format) -->
+    <section id="reviews" class="py-24 bg-slate-100/50 dark:bg-black/50 border-t border-gray-200 dark:border-gray-800/80 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between mb-16 gap-6 z-10 relative">
+                <div>
+                    <h2 class="text-xs uppercase tracking-widest font-extrabold text-yellow-500 mb-2">Member Testimonials</h2>
+                    <p class="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white">GOOGLE MAP REVIEWS</p>
+                </div>
+                <!-- Redirects directly to specified Google Map review section -->
+                <a href="https://www.google.com/maps/place/Commune+Fitness/@20.4686984,85.8934834,17z/data=!4m8!3m7!1s0x3a190dac42593da3:0xcd0de8e5a95ee3ab!8m2!3d20.4686984!4d85.8960583!9m1!1b1!16s%2Fg%2F11zcp4w83_?entry=ttu&g_ep=EgoyMDI2MDgxNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="card-glass text-slate-900 dark:text-white font-bold px-6 py-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-all flex items-center gap-2 text-sm border border-yellow-500/30">
+                    <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i> Read All Reviews on Google Maps
+                </a>
+            </div>
+        </div>
+
+        <!-- Looping Cinematic Reviews -->
+        <div class="marquee-container silver-sweep-container py-4">
+            <div class="marquee-content">
+                <!-- Review 1 -->
+                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-gray-200 dark:border-white/10 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
+                    <div class="flex text-yellow-500 mb-4 text-lg">★★★★★</div>
+                    <p class="text-slate-600 dark:text-gray-300 italic text-sm mb-6 leading-relaxed">"A good training environment along with fully equipped Great place for Work out. Highly recommended in Kataka."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 font-bold flex items-center justify-center">AM</div>
+                        <div>
+                            <div class="font-bold text-slate-900 dark:text-white text-sm">Asrit Mohanty</div>
+                            <div class="text-xs text-slate-500 dark:text-gray-500">Verified Local Guide</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 2 -->
+                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-gray-200 dark:border-white/10 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
+                    <div class="flex text-yellow-500 mb-4 text-lg">★★★★★</div>
+                    <p class="text-slate-600 dark:text-gray-300 italic text-sm mb-6 leading-relaxed">"A great gym with top quality equipment and a very clean environment. The machines are modern and well maintained..."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 font-bold flex items-center justify-center">SS</div>
+                        <div>
+                            <div class="font-bold text-slate-900 dark:text-white text-sm">Sahil Sahoo</div>
+                            <div class="text-xs text-slate-500 dark:text-gray-500">Verified Local Guide</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 3 -->
+                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-gray-200 dark:border-white/10 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
+                    <div class="flex text-yellow-500 mb-4 text-lg">★★★★★</div>
+                    <p class="text-slate-600 dark:text-gray-300 italic text-sm mb-6 leading-relaxed">"Friendly and helpful staff, clean washrooms, and the overall atmosphere is highly motivating for workouts."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 font-bold flex items-center justify-center">SP</div>
+                        <div>
+                            <div class="font-bold text-slate-900 dark:text-white text-sm">Suprava Patra</div>
+                            <div class="text-xs text-slate-500 dark:text-gray-500">Gym Member</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 4 -->
+                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-gray-200 dark:border-white/10 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
+                    <div class="flex text-yellow-500 mb-4 text-lg">★★★★★</div>
+                    <p class="text-slate-600 dark:text-gray-300 italic text-sm mb-6 leading-relaxed">"One of the best premium fitness destinations with excellent recovery zones like steam and sauna."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 font-bold flex items-center justify-center">RD</div>
+                        <div>
+                            <div class="font-bold text-slate-900 dark:text-white text-sm">Rajesh Dash</div>
+                            <div class="text-xs text-slate-500 dark:text-gray-500">Local Guide</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Duplicate for Loop -->
+            <div class="marquee-content" aria-hidden="true">
+                <!-- Review 1 -->
+                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-gray-200 dark:border-white/10 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
+                    <div class="flex text-yellow-500 mb-4 text-lg">★★★★★</div>
+                    <p class="text-slate-600 dark:text-gray-300 italic text-sm mb-6 leading-relaxed">"A good training environment along with fully equipped Great place for Work out. Highly recommended in Kataka."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 font-bold flex items-center justify-center">AM</div>
+                        <div>
+                            <div class="font-bold text-slate-900 dark:text-white text-sm">Asrit Mohanty</div>
+                            <div class="text-xs text-slate-500 dark:text-gray-500">Verified Local Guide</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 2 -->
+                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-gray-200 dark:border-white/10 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
+                    <div class="flex text-yellow-500 mb-4 text-lg">★★★★★</div>
+                    <p class="text-slate-600 dark:text-gray-300 italic text-sm mb-6 leading-relaxed">"A great gym with top quality equipment and a very clean environment. The machines are modern and well maintained..."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 font-bold flex items-center justify-center">SS</div>
+                        <div>
+                            <div class="font-bold text-slate-900 dark:text-white text-sm">Sahil Sahoo</div>
+                            <div class="text-xs text-slate-500 dark:text-gray-500">Verified Local Guide</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 3 -->
+                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-gray-200 dark:border-white/10 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
+                    <div class="flex text-yellow-500 mb-4 text-lg">★★★★★</div>
+                    <p class="text-slate-600 dark:text-gray-300 italic text-sm mb-6 leading-relaxed">"Friendly and helpful staff, clean washrooms, and the overall atmosphere is highly motivating for workouts."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 font-bold flex items-center justify-center">SP</div>
+                        <div>
+                            <div class="font-bold text-slate-900 dark:text-white text-sm">Suprava Patra</div>
+                            <div class="text-xs text-slate-500 dark:text-gray-500">Gym Member</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Review 4 -->
+                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-gray-200 dark:border-white/10 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
+                    <div class="flex text-yellow-500 mb-4 text-lg">★★★★★</div>
+                    <p class="text-slate-600 dark:text-gray-300 italic text-sm mb-6 leading-relaxed">"One of the best premium fitness destinations with excellent recovery zones like steam and sauna."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 font-bold flex items-center justify-center">RD</div>
+                        <div>
+                            <div class="font-bold text-slate-900 dark:text-white text-sm">Rajesh Dash</div>
+                            <div class="text-xs text-slate-500 dark:text-gray-500">Local Guide</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Contact Section -->
+    <section id="contact" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div class="space-y-6">
+                    <div>
+                        <h2 class="text-xs uppercase tracking-widest font-extrabold text-yellow-500 mb-2">Location & Hours</h2>
+                        <p class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">VISIT OUR CENTER</p>
+                    </div>
+                    
+                    <div class="space-y-4 pt-2">
+                        <div class="flex items-start gap-4 card-glass p-5 rounded-2xl border border-gray-200 dark:border-white/10">
+                            <i data-lucide="map-pin" class="w-6 h-6 text-yellow-500 flex-shrink-0 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white text-base">Gym Address</h4>
+                                <p class="text-slate-600 dark:text-gray-400 text-sm mt-1">College Square, 4th floor, Rex Plaza, Ice Factory Road, Kataka, Odisha 753003</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 card-glass p-5 rounded-2xl border border-gray-200 dark:border-white/10">
+                            <i data-lucide="clock" class="w-6 h-6 text-yellow-500 flex-shrink-0 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white text-base">Working Hours</h4>
+                                <p class="text-slate-600 dark:text-gray-400 text-sm mt-1">Morning: Open Daily until 12:00 PM</p>
+                                <p class="text-slate-600 dark:text-gray-400 text-sm">Evening: Reopens at 4:00 PM</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 card-glass p-5 rounded-2xl border border-gray-200 dark:border-white/10">
+                            <i data-lucide="phone" class="w-6 h-6 text-yellow-500 flex-shrink-0 mt-1"></i>
+                            <div>
+                                <h4 class="font-bold text-slate-900 dark:text-white text-base">Direct Phone</h4>
+                                <p class="text-slate-600 dark:text-gray-400 text-sm mt-1"><a href="tel:09938581222" class="hover:text-yellow-500">099385 81222</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Embedded Google Map with Redirection Link Wrapper -->
+                <div class="relative rounded-3xl overflow-hidden card-glass border border-gray-200 dark:border-white/10 min-h-[350px] shadow-2xl group">
+                    <a href="https://www.google.com/maps/place/Commune+Fitness/@20.4686984,85.8934834,17z/data=!3m1!4b1!4m6!3m5!1s0x3a190dac42593da3:0xcd0de8e5a95ee3ab!8m2!3d20.4686984!4d85.8960583!16s%2Fg%2F11zcp4w83_?hl=en&entry=ttu&g_ep=EgoyMDI2MDgxNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="absolute inset-0 z-10 bg-transparent flex items-center justify-center hover:bg-black/20 transition-all cursor-pointer group">
+                        <div class="bg-black/80 backdrop-blur-md text-white font-bold px-6 py-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2 shadow-2xl">
+                            <i data-lucide="external-link" class="w-5 h-5"></i> Open Direct Map
+                        </div>
+                    </a>
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.784532298953!2d85.8810!3d20.4650!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDI3JzU0LjAiTiA4NcKwNTInNTEuNiJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; min-height: 400px;" 
+                        allowfullscreen="" 
+                        loading="lazy"
+                        class="relative z-0">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>  
+    
+    <!-- Leadership Profile Section (Sanjit Kumar Sahoo) with Animated Background & Impressive Line -->
+    <section id="profile" class="py-20 relative bg-slate-900 text-white overflow-hidden border-y border-gray-800">
+        <!-- Interactive Constellation Node Particle Background (Duplicated from Pricing) -->
+        <canvas id="profile-interactive-bg" class="interactive-canvas"></canvas>
+
+        <!-- Impressive Top Animated Line Effect (Cyan Glow) -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_20px_#22d3ee] animate-pulse z-20"></div>
+
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-4">
+            <div class="relative rounded-3xl card-glass border border-white/10 p-8 sm:p-12 shadow-2xl overflow-hidden silver-sweep-container bg-black/40">
+                
+                <!-- Background Glow -->
+                <div class="absolute -top-24 -right-24 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+                    
+                    <!-- Left: Animated Image Showcase -->
+                    <div class="lg:col-span-4 flex justify-center">
+                        <div class="relative group/avatar w-56 h-56 sm:w-64 sm:h-64 rounded-3xl p-1.5 bg-gradient-to-tr from-purple-600 via-cyan-500 to-yellow-500 shadow-[0_0_25px_rgba(34,211,238,0.4)]">
+                            <div class="w-full h-full rounded-[22px] overflow-hidden bg-slate-900 relative">
+                                <img src="12.png" 
+                                     alt="Sanjit Kumar Sahoo" 
+                                     onerror="this.src='12.png'"
+                                     class="w-full h-full object-cover transition-transform duration-700 hover:scale-110 filter contrast-105 brightness-95" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60"></div>
+                            </div>
+                            <div class="absolute -bottom-3 -right-3 bg-emerald-500 text-white p-2.5 rounded-2xl shadow-lg border-2 border-slate-900 flex items-center justify-center">
+                                <i data-lucide="check-circle" class="w-5 h-5"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Leadership Content -->
+                    <div class="lg:col-span-8 space-y-5 text-left">
+                        <div>
+                            <span class="inline-block px-4 py-1.5 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-black uppercase tracking-wider mb-3">
+                                22+ Years Global Leadership
+                            </span>
+                            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
+                                Sanjit Kumar Sahoo
+                            </h2>
+                            <p class="text-cyan-400 font-bold text-lg sm:text-xl mt-1">
+                                Co-Founder & Managing Director
+                            </p>
+                        </div>
+
+                        <div class="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed font-normal">
+                            <p>
+                                Sanjit brings more than <strong class="text-white font-bold">22 years of global leadership experience</strong> in enterprise architecture. A visionary leader driving health, wellness, and community transformation, he has built a trusted ecosystem connecting fitness, lifestyle, and service excellence across Kataka & Bhubaneswar.
+                            </p>
+                            <p>
+                                A forward-thinking entrepreneur, Sanjit Kumar Sahoo leads Commune Fitness Center with a vision to inspire healthier living and stronger communities. His leadership across fitness, food, and healthcare ventures reflects excellence and growth including <strong class="text-white font-bold">Blast Cafe, Barbeque Nation, and Hospital services</strong>.
+                            </p>
+                            <p>
+                                As Co-Founder and CEO of Commune Fitness Center, Sanjit leads a powerful vision for wellness and community growth, representing a rare blend of entrepreneurship, trust, and long-term value.
+                            </p>
+                        </div>
+
+                        <!-- Footer Quote and Working WhatsApp Link (8277754614) -->
+                        <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                            <p class="text-xs sm:text-sm italic text-gray-400 font-medium">
+                                “Translating ambitious business visions into scalable technology ecosystems.”
+                            </p>
+                            
+                            <!-- WhatsApp Button -->
+                            <a href="https://wa.me/918277754614?text=Hi%20Sanjit%20Kumar%20Sahoo,%20I%20am%20reaching%20out%20via%20Commune%20Fitness%20website" 
+                               target="_blank" 
+                               class="inline-flex items-center justify-center gap-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.5)] hover:scale-105 transition-all text-sm flex-shrink-0"
+                               title="Connect with Sanjit Kumar Sahoo on WhatsApp (+91 8277754614)">
+                                <i data-lucide="message-square" class="w-4 h-4"></i>
+                                <span>WhatsApp: +91 8277754614</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & WORKING MAILBOX FORM SECTION -->
+    <section class="py-24 relative bg-slate-50 dark:bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div>
+                        <h2 class="text-xs uppercase tracking-widest font-extrabold text-yellow-500 mb-2">Get In Touch</h2>
+                        <p class="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white">Join the Journey Towards
+                        <br>
+                    <span class="bg-gradient-to-r from-[#FFC371] via-[#DA22FF] to-[#6DD5FA] text-transparent bg-clip-text"> Fitness Transformation</span>
+                       </p>
+                    </div>
+                    <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">
+                        We warmly invite innovators, fitness enthusiasts, and industry leaders to collaborate with us. Reach out directly through our expert panel.
+                    </p>
+                    <div class="flex items-center gap-3 text-sm font-semibold">
+                        <i data-lucide="mail" class="w-5 h-5 text-[#85583D]"></i>
+                        <span>Direct Mailbox: <a href="mailto:sashikantadas@gmail.com" class="underline hover:text-yellow-500">sashikantadas@gmail.com</a></span>
+                    </div>
+                </div>
+                <!-- Working Mailto Form -->
+                <div class="card-glass p-8 sm:p-10 rounded-3xl border border-[#85583D]/30 shadow-2xl">
+                    <h3 class="text-2xl font-bold mb-6 text-slate-900 dark:text-white">Talk to Our Experts</h3>
+                    <form action="mailto:sashikantadas@gmail.com" method="POST" enctype="text/plain" class="space-y-4">
+                        <div>
+                            <input type="text" name="Name" placeholder="Your Name" required class="w-full bg-white dark:bg-black/30 border border-[#85583D]/30 rounded-xl px-4 py-3 focus:outline-none focus:border-[#85583D] text-slate-900 dark:text-white">
+                        </div>
+                        <div>
+                            <input type="email" name="Email" placeholder="Your Email" required class="w-full bg-white dark:bg-black/30 border border-[#85583D]/30 rounded-xl px-4 py-3 focus:outline-none focus:border-[#85583D] text-slate-900 dark:text-white">
+                        </div>
+                        <div>
+                            <input type="text" name="Company" placeholder="Company Name (Optional)" class="w-full bg-white dark:bg-black/30 border border-[#85583D]/30 rounded-xl px-4 py-3 focus:outline-none focus:border-[#85583D] text-slate-900 dark:text-white">
+                        </div>
+                        <div>
+                            <input type="tel" name="Phone" placeholder="Phone Number" required class="w-full bg-white dark:bg-black/30 border border-[#85583D]/30 rounded-xl px-4 py-3 focus:outline-none focus:border-[#85583D] text-slate-900 dark:text-white">
+                        </div>
+                        <div>
+                            <textarea name="Message" rows="4" placeholder="Your Message or Membership Inquiry" required class="w-full bg-white dark:bg-black/30 border border-[#85583D]/30 rounded-xl px-4 py-3 focus:outline-none focus:border-[#85583D] text-slate-900 dark:text-white"></textarea>
+                        </div>
+                        <button type="submit" class="w-full gold-bg text-black font-extrabold py-4 rounded-xl mt-6 hover:scale-[1.01] transition-transform gold-glow">
+                            Submit Inquiry
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FLOATING WORKING WHATSAPP BUTTON -->
+    <a href="https://wa.me/919938581222?text=Hi%20Commune%20Fitness,%20I%20am%20interested%20in%20taking%20a%20gym%20membership!" 
+       target="_blank" 
+       class="fixed bottom-6 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-2xl whatsapp-float hover:scale-110 transition-transform flex items-center justify-center group"
+       title="Chat on WhatsApp">
+        <i data-lucide="message-circle" class="w-7 h-7 fill-white text-green-500"></i>
+        <span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 ease-in-out whitespace-nowrap text-sm font-bold pl-0 group-hover:pl-2">
+            Chat with Us
+        </span>
+    </a>
+
+    <!-- Dynamic Footer with SK DAS Branding -->
+    <footer class="border-t border-gray-200 dark:border-gray-800/80 py-12 bg-slate-100 dark:bg-black/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-between gap-6 md:flex-row text-center md:text-left">
+            <div>
+                <p class="text-slate-900 dark:text-white font-bold text-lg">Commune Fitness Center</p>
+                <p class="text-slate-500 dark:text-gray-500 text-xs mt-1">&copy; 2026 Commune Fitness Kataka. All rights reserved.</p>
+            </div>
+
+            <div class="sk-das-badge px-6 py-3 rounded-2xl flex items-center gap-3">
+                <div class="w-2 h-2 rounded-full bg-yellow-500 animate-ping"></div>
+                <div class="text-xs">
+                    <span class="text-slate-500 dark:text-gray-400 block font-medium">Website Crafted & Designed By</span>
+                    <span class="gold-gradient-text font-black text-sm tracking-wide uppercase block">SK DAS</span>
+                </div>
+                <a href="tel:07798977519" class="ml-2 bg-yellow-500/20 hover:bg-yellow-500 hover:text-black text-yellow-600 dark:text-yellow-400 font-bold px-3 py-1.5 rounded-lg text-xs transition-all">
+                    Contact Developer 07798977519
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Initializations & Logic -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Theme Toggle Logic
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const darkIcon = document.getElementById('theme-toggle-dark-icon');
+        const lightIcon = document.getElementById('theme-toggle-light-icon');
+
+        if (localStorage.getItem('color-theme') === 'light' || (!('color-theme' in localStorage) && !window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.remove('dark');
+            lightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.add('dark');
+            darkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            darkIcon.classList.toggle('hidden');
+            lightIcon.classList.toggle('hidden');
+
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('color-theme', 'light');
+                if (window.particlesMaterial) window.particlesMaterial.color.setHex(0xd97706);
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('color-theme', 'dark');
+                if (window.particlesMaterial) window.particlesMaterial.color.setHex(0xf59e0b);
+            }
+        });
+
+        // Interactive BMI Calculator Logic
+        function calculateBMI() {
+            const weight = parseFloat(document.getElementById('bmi-weight').value);
+            const height = parseFloat(document.getElementById('bmi-height').value) / 100;
+            const resultDiv = document.getElementById('bmi-result');
+
+            if (weight > 0 && height > 0) {
+                const bmi = (weight / (height * height)).toFixed(1);
+                resultDiv.classList.remove('hidden', 'bg-red-500/20', 'bg-green-500/20', 'bg-yellow-500/20', 'text-red-500', 'text-green-500', 'text-yellow-500');
+
+                let category = '';
+                if (bmi < 18.5) {
+                    category = 'Underweight';
+                    resultDiv.classList.add('bg-yellow-500/20', 'text-yellow-600', 'dark:text-yellow-400');
+                } else if (bmi >= 18.5 && bmi <= 24.9) {
+                    category = 'Normal Weight';
+                    resultDiv.classList.add('bg-green-500/20', 'text-green-600', 'dark:text-green-400');
+                } else {
+                    category = 'Overweight';
+                    resultDiv.classList.add('bg-red-500/20', 'text-red-600', 'dark:text-red-400');
+                }
+
+                resultDiv.innerHTML = `Your BMI is <span class="font-black">${bmi}</span> (${category})`;
+            } else {
+                alert('Please enter valid weight and height values!');
+            }
+        }
+
+        // Generic function to initialize interactive background particles
+        function initInteractiveCanvas(canvasId, particleCount, linkDist, particleColorHex, lineColorObj) {
+            const canvas = document.getElementById(canvasId);
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+            let mouse = { x: null, y: null, radius: 120 };
+
+            function resize() {
+                width = canvas.width = canvas.parentElement.clientWidth;
+                height = canvas.height = canvas.parentElement.clientHeight;
+            }
+
+            window.addEventListener('resize', resize);
+            resize();
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.vx = (Math.random() - 0.5) * 1.2;
+                    this.vy = (Math.random() - 0.5) * 1.2;
+                    this.radius = Math.random() * 2 + 1;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+                    if (mouse.x !== null) {
+                        let dx = mouse.x - this.x;
+                        let dy = mouse.y - this.y;
+                        let dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < mouse.radius) {
+                            this.x -= (dx / dist) * 2;
+                            this.y -= (dy / dist) * 2;
+                        }
+                    }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = particleColorHex;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < particleCount; i++) particles.push(new Particle());
+
+            canvas.parentElement.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+
+            canvas.parentElement.addEventListener('mouseleave', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+                    for (let j = i + 1; j < particles.length; j++) {
+                        let dx = particles[i].x - particles[j].x;
+                        let dy = particles[i].y - particles[j].y;
+                        let dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < linkDist) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(${lineColorObj.r}, ${lineColorObj.g}, ${lineColorObj.b}, ${1 - dist / linkDist})`;
+                            ctx.lineWidth = 0.6;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // Init Canvases (Pricing Section & Profile Section)
+        initInteractiveCanvas('interactive-bg', 65, 110, '#f59e0b', {r: 245, g: 158, b: 11});
+        initInteractiveCanvas('interactive-bg-light', 65, 110, '#d97706', {r: 217, g: 119, b: 6});
+        initInteractiveCanvas('profile-interactive-bg', 60, 110, '#22d3ee', {r: 34, g: 211, b: 238});
+
+        // Three.js 3D Flowing Background Particles Animation (Hero)
+        const container = document.getElementById('canvas-container');
+        if (container) {
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            const folderGeometry = new THREE.BufferGeometry();
+            const particlesCount = 700;
+            const posArray = new Float32Array(particlesCount * 3);
+
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 12;
+            }
+
+            folderGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: 0.025,
+                color: document.documentElement.classList.contains('dark') ? 0xf59e0b : 0xd97706,
+                transparent: true,
+                opacity: 0.8
+            });
+            window.particlesMaterial = material;
+
+            const particlesMesh = new THREE.Points(folderGeometry, material);
+            scene.add(particlesMesh);
+
+            camera.position.z = 3;
+            let mouseX = 0;
+            let mouseY = 0;
+
+            window.addEventListener('mousemove', (event) => {
+                mouseX = (event.clientX / window.innerWidth) - 0.5;
+                mouseY = (event.clientY / window.innerHeight) - 0.5;
+            });
+
+            const animate = () => {
+                requestAnimationFrame(animate);
+                particlesMesh.rotation.y += 0.002;
+                particlesMesh.rotation.x += 0.001;
+                particlesMesh.rotation.y += mouseX * 0.05;
+                particlesMesh.rotation.x += mouseY * 0.05;
+                renderer.render(scene, camera);
+            };
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+    </script>
+</body>
+</html>
