@@ -896,8 +896,8 @@
         </div>
     </section>
 
-    <!-- CONTACT & WORKING MAILBOX FORM SECTION -->
-    <section class="py-24 relative bg-slate-50 dark:bg-transparent">
+  <!-- CONTACT & EXPERTS SECTION WITH MANDATORY PRIVACY POLICY CHECKBOX 26 aug 2026 -->
+    <section id="contact" class="py-24 relative light-line-effect">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="space-y-6">
@@ -911,31 +911,41 @@
                     <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">
                         We warmly invite innovators, fitness enthusiasts, and industry leaders to collaborate with us. Reach out directly through our expert panel.
                     </p>
-                    <div class="flex items-center gap-3 text-sm font-semibold">
+                    <div class="flex items-center gap-3 text-sm font-semibold text-slate-900 dark:text-white">
                         <i data-lucide="mail" class="w-5 h-5 text-[#85583D]"></i>
                         <span>Direct Mailbox: <a href="mailto:sashikantadas@gmail.com" class="underline hover:text-yellow-500">sashikantadas@gmail.com</a></span>
                     </div>
                 </div>
-                <!-- Working Mailto Form -->
+
+                <!-- Form Section -->
                 <div class="card-glass p-8 sm:p-10 rounded-3xl border border-[#85583D]/30 shadow-2xl">
                     <h3 class="text-2xl font-bold mb-6 text-slate-900 dark:text-white">Talk to Our Experts</h3>
                     <form action="mailto:sashikantadas@gmail.com" method="POST" enctype="text/plain" class="space-y-4">
                         <div>
-                            <input type="text" name="Name" placeholder="Your Name" required class="w-full bg-white dark:bg-black/30 border border-[#85583D]/30 rounded-xl px-4 py-3 focus:outline-none focus:border-[#85583D] text-slate-900 dark:text-white">
+                            <input type="text" name="Name" placeholder="Your Name" required class="w-full card-glass border border-[#85583D]/30 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-[#85583D]">
                         </div>
                         <div>
-                            <input type="email" name="Email" placeholder="Your Email" required class="w-full bg-white dark:bg-black/30 border border-[#85583D]/30 rounded-xl px-4 py-3 focus:outline-none focus:border-[#85583D] text-slate-900 dark:text-white">
+                            <input type="email" name="Email" placeholder="Your Email" required class="w-full card-glass border border-[#85583D]/30 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-[#85583D]">
                         </div>
                         <div>
-                            <input type="text" name="Company" placeholder="Company Name (Optional)" class="w-full bg-white dark:bg-black/30 border border-[#85583D]/30 rounded-xl px-4 py-3 focus:outline-none focus:border-[#85583D] text-slate-900 dark:text-white">
+                            <input type="text" name="Company" placeholder="Company Name (Optional)" class="w-full card-glass border border-[#85583D]/30 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-[#85583D]">
                         </div>
                         <div>
-                            <input type="tel" name="Phone" placeholder="Phone Number" required class="w-full bg-white dark:bg-black/30 border border-[#85583D]/30 rounded-xl px-4 py-3 focus:outline-none focus:border-[#85583D] text-slate-900 dark:text-white">
+                            <input type="tel" name="Phone" placeholder="Phone Number" required class="w-full card-glass border border-[#85583D]/30 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-[#85583D]">
                         </div>
                         <div>
-                            <textarea name="Message" rows="4" placeholder="Your Message or Membership Inquiry" required class="w-full bg-white dark:bg-black/30 border border-[#85583D]/30 rounded-xl px-4 py-3 focus:outline-none focus:border-[#85583D] text-slate-900 dark:text-white"></textarea>
+                            <textarea name="Message" rows="4" placeholder="Your Message or Membership Inquiry" required class="w-full card-glass border border-[#85583D]/30 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-[#85583D]"></textarea>
                         </div>
-                        <button type="submit" class="w-full gold-bg text-black font-extrabold py-4 rounded-xl mt-6 hover:scale-[1.01] transition-transform gold-glow">
+                        
+                        <!-- Mandatory Privacy Policy Checkbox -->
+                        <div class="flex items-start gap-3 pt-2">
+                            <input type="checkbox" id="privacy-policy" name="Privacy Policy Consent" required class="mt-1 w-4 h-4 rounded border-gray-300 text-yellow-500 focus:ring-yellow-500 accent-yellow-500 cursor-pointer">
+                            <label for="privacy-policy" class="text-xs text-slate-600 dark:text-gray-300 leading-tight cursor-pointer select-none">
+                                I accept the <a href="#privacy-modal" onclick="openPrivacyModal(event)" class="text-yellow-600 dark:text-yellow-400 font-semibold underline hover:text-yellow-500">Privacy Policy</a> and data usage terms.
+                            </label>
+                        </div>
+
+                        <button type="submit" class="w-full gold-bg text-black font-extrabold py-4 rounded-xl mt-4 hover:scale-[1.01] transition-transform gold-glow">
                             Submit Inquiry
                         </button>
                     </form>
@@ -955,14 +965,21 @@
         </span>
     </a>
 
-    <!-- Dynamic Footer with SK DAS Branding -->
+  <!-- Dynamic Footer with SK DAS Branding & Stylish Privacy Policy Option 26 Aug 2026-->
     <footer class="border-t border-gray-200 dark:border-gray-800/80 py-12 bg-slate-100 dark:bg-black/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-between gap-6 md:flex-row text-center md:text-left">
-            <div>
+            <div class="space-y-1">
                 <p class="text-slate-900 dark:text-white font-bold text-lg">Commune Fitness Center</p>
-                <p class="text-slate-500 dark:text-gray-500 text-xs mt-1">&copy; 2026 Commune Fitness Kataka. All rights reserved.</p>
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-slate-500 dark:text-gray-400">
+                    <span>&copy; 2026 Commune Fitness Kataka. All rights reserved.</span>
+                    <!-- Stylish Privacy Policy Footer Link -->
+                    <a href="#privacy-modal" onclick="openPrivacyModal(event)" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full card-glass border border-yellow-500/30 text-yellow-600 dark:text-yellow-400 font-medium hover:border-yellow-500 hover:text-yellow-500 transition-all">
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Privacy Policy
+                    </a>
+                </div>
             </div>
 
+            <!-- DEVELOPED BY SK DAS DYNAMIC BADGE -->
             <div class="sk-das-badge px-6 py-3 rounded-2xl flex items-center gap-3">
                 <div class="w-2 h-2 rounded-full bg-yellow-500 animate-ping"></div>
                 <div class="text-xs">
@@ -976,10 +993,43 @@
         </div>
     </footer>
 
+    <!-- Stylish Privacy Policy Modal -->
+    <div id="privacy-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="card-glass max-w-2xl w-full p-6 sm:p-8 rounded-3xl border border-yellow-500/40 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+            <button onclick="closePrivacyModal()" class="absolute top-5 right-5 p-2 rounded-full card-glass text-slate-400 hover:text-white transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-10 h-10 rounded-xl gold-bg flex items-center justify-center text-black">
+                    <i data-lucide="shield-check" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-2xl font-black text-slate-900 dark:text-white">Privacy Policy & Terms</h3>
+            </div>
+            <div class="space-y-4 text-xs sm:text-sm text-slate-600 dark:text-gray-300 leading-relaxed">
+                <p><strong>1. Information Collection:</strong> Commune Fitness Center collects personal information provided via inquiries (such as name, email, and phone number) strictly for processing requests and membership updates.</p>
+                <p><strong>2. Data Usage:</strong> We do not sell, rent, or distribute your personal details to third parties. Information shared is used solely to respond to queries and provide gym services.</p>
+                <p><strong>3. Security:</strong> Standard measures are taken to ensure your personal data remains safe when submitted through our website.</p>
+                <p><strong>4. Consent:</strong> By checking the privacy checkbox, you grant Commune Fitness permission to contact you regarding your submitted inquiry.</p>
+            </div>
+            <button onclick="closePrivacyModal()" class="mt-6 w-full gold-bg text-black font-extrabold py-3 rounded-xl hover:scale-[1.01] transition-transform">
+                Close & Accept
+            </button>
+        </div>
+    </div>
+
     <!-- JavaScript Initializations & Logic -->
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
+
+        // Privacy Modal Functions
+        function openPrivacyModal(e) {
+            e.preventDefault();
+            document.getElementById('privacy-modal').classList.remove('hidden');
+        }
+        function closePrivacyModal() {
+            document.getElementById('privacy-modal').classList.add('hidden');
+        }
 
         // Theme Toggle Logic
         const themeToggleBtn = document.getElementById('theme-toggle');
