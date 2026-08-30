@@ -34,33 +34,34 @@
             color: #0f172a;
         }
 
+        /* Blast Cafe Aesthetic Styles */
         .gold-gradient-text {
-            background: linear-gradient(135deg, #d97706, #f59e0b, #b45309);
+            background: linear-gradient(135deg, #d97706, #f59e0b, #fbbf24);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .gold-bg {
-            background: linear-gradient(135deg, #d97706, #f59e0b, #fbbf24);
+            background: linear-gradient(135deg, #d97706, #f59e0b, #facc15);
         }
 
         .gold-glow {
-            box-shadow: 0 0 25px rgba(245, 158, 11, 0.35);
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.4);
         }
 
         /* Theme-Adaptive Glassmorphism */
         .dark .card-glass {
-            background: rgba(18, 18, 24, 0.65);
+            background: rgba(18, 18, 24, 0.7);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(245, 158, 11, 0.2);
         }
         .card-glass {
-            background: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(217, 119, 6, 0.15);
+            box-shadow: 0 10px 30px -10px rgba(217, 119, 6, 0.1);
         }
 
         /* Logo Animations */
@@ -95,7 +96,7 @@
             background: linear-gradient(
                 90deg,
                 transparent,
-                rgba(255, 255, 255, 0.15),
+                rgba(245, 158, 11, 0.2),
                 transparent
             );
             transform: translateX(-100%) rotate(25deg);
@@ -118,26 +119,44 @@
             position: absolute;
             height: 1px;
             width: 300px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
-            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+            background: linear-gradient(90deg, transparent, rgba(245,158,11,0.8), transparent);
+            box-shadow: 0 0 10px rgba(245,158,11,0.5);
             animation: horizontalSweep 8s linear infinite;
             z-index: 10;
+        }
+
+        /* Stylish Button Shine Animation */
+        @keyframes buttonShine {
+            0% { left: -100%; }
+            20% { left: 100%; }
+            100% { left: 100%; }
+        }
+        .animate-shine::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-20deg);
+            animation: buttonShine 3s infinite;
         }
 
         /* Animated Developer Footer */
         .dark .sk-das-badge {
             background: linear-gradient(90deg, #111827, #1f2937, #111827);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
         }
         .sk-das-badge {
             background: linear-gradient(90deg, #ffffff, #f1f5f9, #ffffff);
-            border: 1px solid rgba(245, 158, 11, 0.4);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(245, 158, 11, 0.5);
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.1);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .sk-das-badge:hover {
-            box-shadow: 0 0 25px rgba(245, 158, 11, 0.5);
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.6);
             border-color: #f59e0b;
             transform: translateY(-3px);
         }
@@ -175,7 +194,7 @@
         .marquee-content {
             flex-shrink: 0;
             display: flex;
-            justify-content: space-around;
+            justify-around: space-around;
             gap: 1.5rem;
             min-width: 100%;
             animation: scroll-left 35s linear infinite;
@@ -186,6 +205,61 @@
         @keyframes scroll-left {
             from { transform: translateX(0); }
             to { transform: translateX(-100%); }
+        }
+
+        /* 3D Circular Rotating Gallery Styles */
+        .circle-gallery-viewport {
+            perspective: 1000px;
+            width: 100%;
+            height: 520px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .circle-gallery-ring {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            animation: rotateCircle 25s linear infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .circle-gallery-viewport:hover .circle-gallery-ring {
+            animation-play-state: paused;
+        }
+        @keyframes rotateCircle {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+        .circle-card {
+            position: absolute;
+            width: 220px;
+            height: 300px;
+            border-radius: 1.25rem;
+            overflow: hidden;
+            cursor: pointer;
+            transition: filter 0.5s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            backface-visibility: visible;
+            border: 2px solid rgba(245, 158, 11, 0.5);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            background: #121218;
+        }
+        .circle-card:hover {
+            border-color: #f59e0b;
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.7);
+        }
+        .circle-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .circle-card:hover img {
+            transform: scale(1.1);
         }
 
         /* Custom Scrollbar */
@@ -199,18 +273,82 @@
             background: #f1f5f9;
         }
         ::-webkit-scrollbar-thumb {
-            background: #d97706;
+            background: #f59e0b;
             border-radius: 4px;
+        }
+
+        /* SCROLL MASK / APERTURE EFFECT FOR SANJIT KUMAR SAHOO SECTION */
+        .scroll-mask-wrapper {
+            position: relative;
+            width: 100%;
+            height: 250vh;
+            background-color: #030305;
+        }
+        .scroll-mask-sticky {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .scroll-mask-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            clip-path: circle(var(--mask-radius, 8%) at 50% 50%);
+            -webkit-clip-path: circle(var(--mask-radius, 8%) at 50% 50%);
+            will-change: clip-path, -webkit-clip-path;
+            transition: clip-path 0.08s ease-out, -webkit-clip-path 0.08s ease-out;
+            box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.9);
+        }
+        .aperture-overlay {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 30;
+            background: radial-gradient(circle at 50% 50%, transparent var(--mask-radius, 8%), rgba(3, 3, 5, 0.95) calc(var(--mask-radius, 8%) + 6%));
+            will-change: background;
+            transition: background 0.08s ease-out;
+        }
+
+        /* --- LUXURY FLIP-BOOK / MENU STYLING --- */
+        .flipbook-scene {
+            perspective: 2000px;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .flipbook-card {
+            width: 100%;
+            min-height: 520px;
+            border-radius: 2rem;
+            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.6s ease;
+            transform-style: preserve-3d;
+        }
+        .dark .flipbook-card {
+            background: linear-gradient(145deg, #13141b, #090a0e);
+            border: 2px solid rgba(245, 158, 11, 0.7);
+            box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.95), 0 0 50px rgba(245, 158, 11, 0.35);
+        }
+        body:not(.dark) .flipbook-card {
+            background: linear-gradient(145deg, #ffffff, #fdf8f0);
+            border: 2px solid rgba(245, 158, 11, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(245, 158, 11, 0.15), 0 0 30px rgba(245, 158, 11, 0.2);
         }
     </style>
 </head>
-<body class="antialiased selection:bg-yellow-500 selection:text-black relative">
+<body class="antialiased selection:bg-amber-400 selection:text-black relative">
 
     <!-- 3D Canvas Background for Hero Section -->
     <div id="canvas-container" class="absolute top-0 left-0 w-full h-[100vh] pointer-events-none z-0 opacity-40 dark:opacity-40"></div>
 
     <!-- Header Navigation -->
-    <nav class="fixed top-0 left-0 w-full z-50 card-glass border-b border-gray-200 dark:border-gray-800/80">
+    <nav class="fixed top-0 left-0 w-full z-50 card-glass border-b border-amber-500/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <a href="#" class="flex items-center gap-3 group animate-logo-load">
                 <div class="silver-sweep-container relative rounded-xl overflow-hidden shadow-lg gold-glow group-hover:scale-105 transition-transform bg-white/95 p-2 flex items-center justify-center">
@@ -218,19 +356,21 @@
                 </div>
             </a>
             
-            <div class="hidden md:flex items-center gap-8 text-sm font-semibold tracking-wide text-slate-700 dark:text-gray-300">
-                <a href="#hero" class="hover:text-yellow-500 transition-colors">About</a>
-                <a href="#features" class="hover:text-yellow-500 transition-colors">Facilities</a>
-                <a href="#pricing" class="hover:text-yellow-500 transition-colors">Membership Pricing</a>
-                <a href="#calculator" class="hover:text-yellow-500 transition-colors">BMI Calc</a>
-                <a href="#gallery" class="hover:text-yellow-500 transition-colors">Gallery</a>
-                <a href="#reviews" class="hover:text-yellow-500 transition-colors">Reviews</a>
-                <a href="#contact" class="hover:text-yellow-500 transition-colors">Contact</a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-bold tracking-wide text-amber-700 dark:text-amber-400">
+                <a href="#hero" class="hover:text-amber-500 transition-colors">About</a>
+                <a href="#features" class="hover:text-amber-500 transition-colors">Facilities</a>
+                <a href="#pricing" class="hover:text-amber-500 transition-colors">Membership Pricing</a>
+                <a href="#calculator" class="hover:text-amber-500 transition-colors">BMI Calc</a>
+                <a href="#gallery" class="hover:text-amber-500 transition-colors">Gallery</a>
+                <a href="#faq" class="hover:text-amber-500 transition-colors">FAQ</a>
+                <a href="#reviews" class="hover:text-amber-500 transition-colors">Reviews</a>
+                <a href="#profile" class="hover:text-amber-500 transition-colors">Leadership Profile</a>
+                <a href="#contact" class="hover:text-amber-500 transition-colors">Contact</a>
             </div>
 
             <div class="flex items-center gap-3">
                 <!-- Theme Toggle Button -->
-                <button id="theme-toggle" class="p-2.5 rounded-xl card-glass border border-gray-300 dark:border-gray-700 text-slate-800 dark:text-yellow-400 hover:scale-105 transition-all flex items-center justify-center">
+                <button id="theme-toggle" class="p-2.5 rounded-xl card-glass border border-amber-500/30 text-amber-700 dark:text-amber-400 hover:scale-105 transition-all flex items-center justify-center">
                     <i id="theme-toggle-dark-icon" data-lucide="moon" class="w-5 h-5 hidden"></i>
                     <i id="theme-toggle-light-icon" data-lucide="sun" class="w-5 h-5 hidden"></i>
                 </button>
@@ -250,19 +390,19 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="space-y-6 text-center lg:text-left z-20">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full card-glass border border-yellow-500/40 text-yellow-600 dark:text-yellow-400 text-xs sm:text-sm font-semibold">
-                        <i data-lucide="star" class="w-4 h-4 fill-yellow-400 text-yellow-500"></i> 5.0 Rated Gym in Kataka • Rex Plaza 4th Floor
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full card-glass border border-amber-500/40 text-amber-700 dark:text-amber-400 text-xs sm:text-sm font-bold">
+                        <i data-lucide="star" class="w-4 h-4 fill-amber-400 text-amber-500"></i> 5.0 Rated Gym in Kataka • Rex Plaza 4th Floor
                     </div>
                     <div class="flex justify-center lg:justify-start">
                         <div class="relative group animate-bounce duration-1000">
-                            <div class="absolute -inset-1 custom-bg rounded-2xl blur-lg opacity-40"></div>
-                            <div class="relative card-glass p-4 rounded-2xl border border-[#85583D]/30 flex items-center gap-4">
-                                <div class="w-16 h-16 rounded-xl custom-bg flex items-center justify-center text-white font-black text-3xl shadow-xl custom-glow">
+                            <div class="absolute -inset-1 gold-bg rounded-2xl blur-lg opacity-40"></div>
+                            <div class="relative card-glass p-4 rounded-2xl border border-amber-500/40 flex items-center gap-4">
+                                <div class="w-16 h-16 rounded-xl gold-bg flex items-center justify-center text-black font-black text-3xl shadow-xl gold-glow">
                                     <img src="1.png" alt="Commune Fitness Logo" class="h-10 w-auto object-contain" />
                                 </div>
                                 <div class="text-left">
-                                    <h2 class="text-2xl font-black uppercase tracking-wider text-[#85583D] dark:text-[#FFFFFF]">Commune Fitness</h2>
-                                    <p class="text-xs font-bold tracking-widest text-[#D5BCA6] uppercase">Rex Plaza, 4th Floor, Kataka</p>
+                                    <h2 class="text-2xl font-black uppercase tracking-wider text-amber-700 dark:text-amber-400">Commune Fitness</h2>
+                                    <p class="text-xs font-bold tracking-widest text-amber-600/80 dark:text-amber-300 uppercase">Rex Plaza, 4th Floor, Kataka</p>
                                 </div>
                             </div>
                         </div>
@@ -271,34 +411,34 @@
                         FORGE YOUR <br/>
                         <span class="gold-gradient-text">ULTIMATE SELF</span>
                     </h1>
-                    <p class="text-slate-600 dark:text-gray-400 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                    <p class="text-slate-700 dark:text-gray-300 text-base sm:text-lg max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed">
                         Step into Kataka's most elite fitness destination. Featuring heavy-duty Life Fitness equipment, personal coaching, dedicated steam/sauna recovery, and an unmatchable workout atmosphere.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
                         <a href="https://wa.me/919938581222?text=Hi%20Commune%20Fitness,%20I%20want%20to%20join%20the%20gym!" target="_blank" class="gold-bg text-black font-extrabold px-8 py-4 rounded-xl hover:scale-105 transition-all text-center flex items-center justify-center gap-2 shadow-lg gold-glow">
                             <i data-lucide="zap" class="w-5 h-5"></i> Join Gym Today
                         </a>
-                        <a href="https://maps.google.com/?q=Commune+Fitness+Rex+Plaza+Kataka" target="_blank" class="card-glass text-slate-900 dark:text-white font-bold px-8 py-4 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-all text-center flex items-center justify-center gap-2 border border-gray-300 dark:border-white/10">
-                            <i data-lucide="map-pin" class="w-5 h-5 text-yellow-500"></i> Location & Route
+                        <a href="https://maps.google.com/?q=Commune+Fitness+Rex+Plaza+Kataka" target="_blank" class="card-glass text-slate-900 dark:text-white font-bold px-8 py-4 rounded-xl hover:bg-amber-500/10 transition-all text-center flex items-center justify-center gap-2 border border-amber-500/30">
+                            <i data-lucide="map-pin" class="w-5 h-5 text-amber-500"></i> Location & Route
                         </a>
                     </div>
                 </div>
 
                 <div class="relative group z-20">
                     <div class="absolute -inset-1 gold-bg rounded-3xl blur-2xl opacity-30 group-hover:opacity-50 transition duration-1000"></div>
-                    <div class="relative rounded-3xl overflow-hidden card-glass border border-gray-200 dark:border-white/10 p-2 shadow-2xl hero-zoom-img silver-sweep-container">
-                    <img src="2.png" 
-                    alt="Commune Fitness Signage" 
-                    class="w-full h-[380px] sm:h-[460px] object-cover rounded-2xl filter brightness-105 dark:brightness-100 transition duration-700">
+                    <div class="relative rounded-3xl overflow-hidden card-glass border border-amber-500/30 p-2 shadow-2xl hero-zoom-img silver-sweep-container">
+                        <img src="2.png" 
+                        alt="Commune Fitness Signage" 
+                        class="w-full h-[380px] sm:h-[460px] object-cover rounded-2xl filter brightness-105 dark:brightness-100 transition duration-700">
 
                         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
-                            <h2 class="text-3xl sm:text-4xl font-black tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-gray-200 via-white to-gray-400 drop-shadow-[0_2px_10px_rgba(255,255,255,0.4)] uppercase">
+                            <h2 class="text-3xl sm:text-4xl font-black tracking-widest text-amber-400 drop-shadow-[0_2px_10px_rgba(245,158,11,0.6)] uppercase">
                                 COMMUNE FITNESS
                             </h2>
                         </div>
-                        <div class="absolute top-6 right-6 card-glass px-4 py-2 rounded-xl border border-white/20 flex items-center gap-2 shadow-xl">
+                        <div class="absolute top-6 right-6 card-glass px-4 py-2 rounded-xl border border-amber-500/40 flex items-center gap-2 shadow-xl">
                             <div class="w-2.5 h-2.5 rounded-full bg-green-500 animate-ping"></div>
-                            <span class="text-xs font-bold text-white uppercase tracking-wider">Rex Plaza</span>
+                            <span class="text-xs font-bold text-amber-500 dark:text-amber-400 uppercase tracking-wider">Rex Plaza</span>
                         </div>
                     </div>
                 </div>
@@ -306,25 +446,68 @@
         </div>
     </section>
 
+    <!-- NEW HIGH-IMPACT VIDEO SPOTLIGHT SECTION -->
+    <section id="video-spotlight" class="py-20 relative bg-amber-950/10 dark:bg-black/80 border-y border-amber-500/20">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full card-glass border border-amber-500/40 text-amber-700 dark:text-amber-400 text-xs font-bold uppercase tracking-widest mb-4 shadow-md">
+                <i data-lucide="play-circle" class="w-4 h-4 text-amber-500 fill-amber-500"></i> Cinematic Experience
+            </div>
+            <h2 class="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white mb-4 uppercase tracking-tight">
+                Experience <span class="gold-gradient-text">Commune Fitness</span>
+            </h2>
+            <p class="text-slate-700 dark:text-gray-300 text-sm sm:text-base max-w-2xl mx-auto mb-10 font-medium">
+                Watch our exclusive tour and elite training atmosphere in high definition. Built for those who refuse to compromise.
+            </p>
+
+            <div class="relative group rounded-3xl p-3 sm:p-4 card-glass border-2 border-amber-500 animated-video-frame shadow-2xl bg-black/60 overflow-hidden">
+                <div class="absolute -inset-2 gold-bg rounded-3xl blur-2xl opacity-20 group-hover:opacity-35 transition duration-700 pointer-events-none"></div>
+                
+                <div class="relative rounded-2xl overflow-hidden aspect-video w-full bg-black shadow-inner">
+                    <video 
+                        class="w-full h-full object-cover" 
+                        controls 
+                        autoplay 
+                        muted 
+                        loop 
+                        playsinline 
+                        preload="metadata">
+                        <source src="Video Project 2 (13).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
+                <div class="mt-4 flex flex-col sm:flex-row items-center justify-between px-2 gap-3">
+                    <div class="flex items-center gap-2 text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-widest">
+                        <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping"></span>
+                        Rex Plaza 4th Floor, Kataka • Live Preview
+                    </div>
+                    <a href="https://wa.me/919938581222?text=Hi%20Commune%20Fitness,%20I%20saw%20your%20video%20and%20want%20to%20visit!" target="_blank" class="gold-bg text-black font-extrabold px-6 py-2 rounded-xl text-xs uppercase tracking-wider hover:scale-105 transition-all shadow-lg gold-glow">
+                        Book Free Trial Visit
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Key Highlights / Stats Bar -->
-    <section class="py-10 border-y border-gray-200 dark:border-gray-800/80 bg-slate-100/60 dark:bg-black/40 backdrop-blur-md">
+    <section class="py-10 border-y border-amber-500/20 bg-amber-50/50 dark:bg-black/40 backdrop-blur-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div class="space-y-1">
                     <h3 class="text-3xl sm:text-4xl font-black gold-gradient-text">5.0 ★</h3>
-                    <p class="text-slate-600 dark:text-gray-400 text-xs sm:text-sm font-medium">Google Rating</p>
+                    <p class="text-slate-700 dark:text-amber-200/80 text-xs sm:text-sm font-bold">Google Rating</p>
                 </div>
                 <div class="space-y-1">
                     <h3 class="text-3xl sm:text-4xl font-black gold-gradient-text">4th Floor</h3>
-                    <p class="text-slate-600 dark:text-gray-400 text-xs sm:text-sm font-medium">Rex Plaza, Kataka</p>
+                    <p class="text-slate-700 dark:text-amber-200/80 text-xs sm:text-sm font-bold">Rex Plaza, Kataka</p>
                 </div>
                 <div class="space-y-1">
                     <h3 class="text-3xl sm:text-4xl font-black gold-gradient-text">Pro Level</h3>
-                    <p class="text-slate-600 dark:text-gray-400 text-xs sm:text-sm font-medium">Life Fitness Machines</p>
+                    <p class="text-slate-700 dark:text-amber-200/80 text-xs sm:text-sm font-bold">Life Fitness Machines</p>
                 </div>
                 <div class="space-y-1">
                     <h3 class="text-3xl sm:text-4xl font-black gold-gradient-text">Steam / Sauna</h3>
-                    <p class="text-slate-600 dark:text-gray-400 text-xs sm:text-sm font-medium">Recovery Suite</p>
+                    <p class="text-slate-700 dark:text-amber-200/80 text-xs sm:text-sm font-bold">Recovery Suite</p>
                 </div>
             </div>
         </div>
@@ -334,157 +517,228 @@
     <section id="features" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-3xl mx-auto mb-16">
-                <h2 class="text-xs uppercase tracking-widest font-extrabold text-yellow-500 mb-2">Why Choose Us</h2>
+                <h2 class="text-xs uppercase tracking-widest font-extrabold text-amber-600 dark:text-amber-400 mb-2">Why Choose Us</h2>
                 <p class="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white">WORLD CLASS FACILITIES</p>
             </div>
 
-            <div class="mb-20 relative group rounded-3xl overflow-hidden card-glass border border-white/10 p-3 shadow-2xl silver-sweep-container">
+            <div class="mb-20 relative group rounded-3xl overflow-hidden card-glass border border-amber-500/30 p-3 shadow-2xl silver-sweep-container">
                 <div class="absolute -inset-1 gold-bg rounded-3xl blur-2xl opacity-20 group-hover:opacity-40 transition duration-1000"></div>
                 <div class="relative rounded-2xl overflow-hidden h-[350px] sm:h-[450px]">
                     <img src="3.png" alt="Commune Fitness Club Architecture" class="w-full h-full object-cover group-hover:scale-105 transition duration-1000">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-8">
-                        <span class="text-xs gold-bg text-black font-black px-3 py-1 rounded-full uppercase tracking-widest w-max mb-3">Architectural Excellence</span>
-                        <h3 class="text-2xl sm:text-4xl font-black text-white">State-of-the-Art Luxury Training Arena</h3>
-                        <p class="text-gray-300 text-sm sm:text-base mt-2 max-w-2xl">Designed with precision wood-slat acoustics, specialized ambient lighting, and top-tier fitness ecosystems to elevate your training experience.</p>
+                        <span class="text-xs gold-bg text-black font-black px-3 py-1 rounded-full uppercase tracking-widest w-max mb-3 shadow-md">Architectural Excellence</span>
+                        <h3 class="text-2xl sm:text-4xl font-black text-amber-300">State-of-the-Art Luxury Training Arena</h3>
+                        <p class="text-amber-100 text-sm sm:text-base mt-2 max-w-2xl font-medium">Designed with precision wood-slat acoustics, specialized ambient lighting, and top-tier fitness ecosystems to elevate your training experience.</p>
                     </div>
                 </div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="card-glass p-8 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-yellow-500/50 transition-all duration-300 hover:-translate-y-2">
+                <div class="card-glass p-8 rounded-2xl border border-amber-500/30 hover:border-amber-500 transition-all duration-300 hover:-translate-y-2">
                     <div class="w-14 h-14 rounded-xl gold-bg flex items-center justify-center text-black mb-6 gold-glow">
                         <i data-lucide="dumbbell" class="w-7 h-7"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Modern Heavy Strength Zone</h3>
-                    <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">Fully stacked with high-grade dumbbells, Olympic barbells, squat racks, and cable crossover stations.</p>
+                    <p class="text-slate-700 dark:text-gray-300 text-sm leading-relaxed font-medium">Fully stacked with high-grade dumbbells, Olympic barbells, squat racks, and cable crossover stations.</p>
                 </div>
 
-                <div class="card-glass p-8 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-yellow-500/50 transition-all duration-300 hover:-translate-y-2">
+                <div class="card-glass p-8 rounded-2xl border border-amber-500/30 hover:border-amber-500 transition-all duration-300 hover:-translate-y-2">
                     <div class="w-14 h-14 rounded-xl gold-bg flex items-center justify-center text-black mb-6 gold-glow">
                         <i data-lucide="activity" class="w-7 h-7"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">High-Tech Cardio Deck</h3>
-                    <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">Interactive treadmills, spin bikes, and ellipticals with real-time calorie and pulse monitoring screens.</p>
+                    <p class="text-slate-700 dark:text-gray-300 text-sm leading-relaxed font-medium">Interactive treadmills, spin bikes, and ellipticals with real-time calorie and pulse monitoring screens.</p>
                 </div>
 
-                <div class="card-glass p-8 rounded-2xl border border-gray-200 dark:border-white/10 hover:border-yellow-500/50 transition-all duration-300 hover:-translate-y-2">
+                <div class="card-glass p-8 rounded-2xl border border-amber-500/30 hover:border-amber-500 transition-all duration-300 hover:-translate-y-2">
                     <div class="w-14 h-14 rounded-xl gold-bg flex items-center justify-center text-black mb-6 gold-glow">
                         <i data-lucide="flame" class="w-7 h-7"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Sauna & Steam Recovery</h3>
-                    <p class="text-slate-600 dark:text-gray-400 text-sm leading-relaxed">Promote rapid muscle recovery, detoxicating sweat, and relaxation after intense workout sessions.</p>
+                    <p class="text-slate-700 dark:text-gray-300 text-sm leading-relaxed font-medium">Promote rapid muscle recovery, detoxicating sweat, and relaxation after intense workout sessions.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PREMIUM GYM ADMISSION & MEMBERSHIP PRICING SECTION -->
-    <section id="pricing" class="py-24 relative overflow-hidden bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white border-y border-gray-200 dark:border-gray-800">
+    <!-- PREMIUM GYM ADMISSION & MEMBERSHIP RATES (WITH STYLISH FLIP MENU BOOK & FLIP SOUND) -->
+    <section id="pricing" class="py-24 relative overflow-hidden bg-amber-50/30 dark:bg-slate-900 text-slate-900 dark:text-white border-y border-amber-500/20">
         <canvas id="interactive-bg" class="interactive-canvas hidden dark:block"></canvas>
         <canvas id="interactive-bg-light" class="interactive-canvas block dark:hidden"></canvas>
 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="text-center max-w-3xl mx-auto mb-16">
-                <span class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border border-yellow-500/30 inline-block mb-3">
-                    Limited Time Offer
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30 inline-block mb-3">
+                    Interactive Rates Booklet
                 </span>
-                <h2 class="text-4xl sm:text-6xl font-black uppercase tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-slate-900 to-slate-500 dark:from-white dark:to-gray-300 drop-shadow-xl filter pb-2">
+                <h2 class="text-4xl sm:text-6xl font-black uppercase tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-slate-900 to-amber-700 dark:from-white dark:to-amber-300 drop-shadow-xl filter pb-2">
                     Commune Premium Gym Rates
                 </h2>
-                <p class="text-slate-600 dark:text-gray-400 text-sm sm:text-base mt-3 font-medium">Transform your fitness with our high-end elite membership plans crafted for champions.</p>
+                <p class="text-slate-700 dark:text-amber-200/80 text-sm sm:text-base mt-3 font-medium">Transform your fitness with our high-end elite membership plans crafted for champions. Flip through our interactive rate card below.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-                <!-- Monthly Plan -->
-                <div class="card-glass p-8 rounded-3xl border border-gray-300 dark:border-white/10 hover:border-yellow-500/60 transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between group relative overflow-hidden bg-white/80 dark:bg-black/50">
-                    <div>
-                        <div class="text-xs font-bold text-yellow-600 dark:text-yellow-500 uppercase tracking-widest mb-1">Starter Pack</div>
-                        <h3 class="text-2xl font-black">Monthly Plan</h3>
-                        <div class="my-6">
-                            <span class="text-gray-400 line-through text-lg font-semibold mr-2">₹2,500</span>
-                            <span class="text-4xl font-black">₹2,000</span>
-                            <span class="text-xs text-yellow-600 dark:text-yellow-400 font-bold block mt-1">SAVE ₹500 INSTANTLY</span>
+            <!-- FLIP MENU BOOK CONTAINER -->
+            <div class="flipbook-scene mb-12">
+                <div class="flipbook-card p-6 sm:p-10 relative flex flex-col justify-between" id="flipbook-page-container">
+                    
+                    <!-- PAGE 1: COMMUNE FITNESS RATES (Special Discounted Admission Menu) -->
+                    <div id="page-1" class="space-y-6">
+                        <div class="text-center pb-4 border-b border-amber-500/30">
+                            <h3 class="text-2xl sm:text-3xl font-black tracking-wider text-amber-600 dark:text-amber-400 uppercase drop-shadow-md">Commune Fitness Rates</h3>
+                            <p class="text-xs uppercase tracking-widest text-slate-600 dark:text-amber-200/80 font-bold mt-1">Special Discounted Admission Menu</p>
                         </div>
-                        <p class="text-slate-500 dark:text-gray-400 text-xs leading-relaxed border-t border-gray-200 dark:border-white/10 pt-4">Perfect for short-term fitness targets and testing the elite equipment.</p>
-                    </div>
-                    <a href="https://wa.me/919938581222?text=Hi%20Commune%20Fitness,%20I%20want%20to%20enroll%20in%20the%20Monthly%20Plan!" target="_blank" class="mt-8 w-full py-3 rounded-xl border border-yellow-500/40 text-yellow-600 dark:text-yellow-400 font-bold text-center block group-hover:bg-yellow-500 group-hover:text-black transition-all">
-                        Claim Discount
-                    </a>
-                </div>
 
-                <!-- Quarterly Plan -->
-                <div class="card-glass p-8 rounded-3xl border border-gray-300 dark:border-white/10 hover:border-yellow-500/60 transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between group relative overflow-hidden bg-white/80 dark:bg-black/50">
-                    <div>
-                        <div class="text-xs font-bold text-yellow-600 dark:text-yellow-500 uppercase tracking-widest mb-1">3 Months Access</div>
-                        <h3 class="text-2xl font-black">Quarterly Plan</h3>
-                        <div class="my-6">
-                            <span class="text-gray-400 line-through text-lg font-semibold mr-2">₹6,000</span>
-                            <span class="text-4xl font-black">₹5,100</span>
-                            <span class="text-xs text-yellow-600 dark:text-yellow-400 font-bold block mt-1">SAVE ₹900 INSTANTLY</span>
-                        </div>
-                        <p class="text-slate-500 dark:text-gray-400 text-xs leading-relaxed border-t border-gray-200 dark:border-white/10 pt-4">Consistent training cycle for visible muscle conditioning and transformation.</p>
-                    </div>
-                    <a href="https://wa.me/919938581222?text=Hi%20Commune%20Fitness,%20I%20want%20to%20enroll%20in%20the%20Quarterly%20Plan!" target="_blank" class="mt-8 w-full py-3 rounded-xl border border-yellow-500/40 text-yellow-600 dark:text-yellow-400 font-bold text-center block group-hover:bg-yellow-500 group-hover:text-black transition-all">
-                        Claim Discount
-                    </a>
-                </div>
+                        <div class="space-y-4">
+                            <!-- 1 Month Admission -->
+                            <div class="p-4 rounded-2xl bg-white/70 dark:bg-[#1a1b24] border border-amber-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:border-amber-500 transition-colors shadow-md">
+                                <div>
+                                    <h4 class="font-black text-base sm:text-lg text-slate-900 dark:text-white drop-shadow-sm">1 Month Admission</h4>
+                                    <p class="text-xs text-slate-700 dark:text-amber-100/90 font-bold">Full Access to Heavy Strength, Cardio & Locker</p>
+                                </div>
+                                <div class="text-left sm:text-right flex items-center sm:block gap-3">
+                                    <span class="text-slate-500 dark:text-amber-300/60 line-through text-sm mr-2 sm:mr-0 sm:block">₹2,500</span>
+                                    <span class="text-2xl sm:text-3xl font-black text-amber-600 dark:text-amber-400 drop-shadow-sm">₹2,000</span>
+                                </div>
+                            </div>
 
-                <!-- Half-Yearly Plan -->
-                <div class="card-glass p-8 rounded-3xl border-2 border-yellow-500 shadow-2xl gold-glow hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between relative group bg-white/90 dark:bg-black/80">
-                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 gold-bg text-black font-black text-[10px] tracking-widest uppercase px-4 py-1 rounded-full shadow-lg">
-                        Most Popular
-                    </div>
-                    <div>
-                        <div class="text-xs font-bold text-yellow-600 dark:text-yellow-400 uppercase tracking-widest mb-1">6 Months Dedicated</div>
-                        <h3 class="text-2xl font-black">Half-Yearly</h3>
-                        <div class="my-6">
-                            <span class="text-gray-400 line-through text-lg font-semibold mr-2">₹10,000</span>
-                            <span class="text-4xl font-black text-yellow-500 dark:text-yellow-400">₹9,000</span>
-                            <span class="text-xs text-green-600 dark:text-green-400 font-bold block mt-1">SAVE ₹1,000 INSTANTLY</span>
-                        </div>
-                        <p class="text-slate-500 dark:text-gray-300 text-xs leading-relaxed border-t border-gray-200 dark:border-white/10 pt-4">Full lifestyle shift with complete access to group classes & recovery sessions.</p>
-                    </div>
-                    <a href="https://wa.me/919938581222?text=Hi%20Commune%20Fitness,%20I%20want%20to%20enroll%20in%20the%20Half-Yearly%20Plan!" target="_blank" class="mt-8 w-full py-3 rounded-xl gold-bg text-black font-extrabold text-center block shadow-lg hover:scale-105 transition-all">
-                        Claim VIP Offer
-                    </a>
-                </div>
+                            <!-- 3 Months Quarterly -->
+                            <div class="p-4 rounded-2xl bg-white/70 dark:bg-[#1a1b24] border border-amber-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:border-amber-500 transition-colors shadow-md">
+                                <div>
+                                    <h4 class="font-black text-base sm:text-lg text-slate-900 dark:text-white drop-shadow-sm">3 Months Quarterly</h4>
+                                    <p class="text-xs text-slate-700 dark:text-amber-100/90 font-bold">Includes Steam & Sauna Recovery + Fitness Assessment</p>
+                                </div>
+                                <div class="text-left sm:text-right flex items-center sm:block gap-3">
+                                    <span class="text-slate-500 dark:text-amber-300/60 line-through text-sm mr-2 sm:mr-0 sm:block">₹6,000</span>
+                                    <span class="text-2xl sm:text-3xl font-black text-amber-600 dark:text-amber-400 drop-shadow-sm">₹5,100</span>
+                                </div>
+                            </div>
 
-                <!-- Yearly Plan -->
-                <div class="card-glass p-8 rounded-3xl border border-gray-300 dark:border-white/10 hover:border-yellow-500/60 transition-all duration-500 hover:-translate-y-2 flex flex-col justify-between group relative overflow-hidden bg-white/80 dark:bg-black/50">
-                    <div>
-                        <div class="text-xs font-bold text-yellow-600 dark:text-yellow-500 uppercase tracking-widest mb-1">12 Months Ultimate</div>
-                        <h3 class="text-2xl font-black">Yearly Pass</h3>
-                        <div class="my-6">
-                            <span class="text-gray-400 line-through text-lg font-semibold mr-2">₹18,000</span>
-                            <span class="text-4xl font-black">₹16,200</span>
-                            <span class="text-xs text-yellow-600 dark:text-yellow-400 font-bold block mt-1">SAVE ₹1,800 INSTANTLY</span>
+                            <!-- 6 Months Half-Yearly -->
+                            <div class="p-4 rounded-2xl bg-white/70 dark:bg-[#1a1b24] border border-amber-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:border-amber-500 transition-colors shadow-md">
+                                <div>
+                                    <h4 class="font-black text-base sm:text-lg text-slate-900 dark:text-white drop-shadow-sm">6 Months Half-Yearly</h4>
+                                    <p class="text-xs text-slate-700 dark:text-amber-100/90 font-bold">VIP Group Classes (Zumba, Yoga & CrossFit) Included</p>
+                                </div>
+                                <div class="text-left sm:text-right flex items-center sm:block gap-3">
+                                    <span class="text-slate-500 dark:text-amber-300/60 line-through text-sm mr-2 sm:mr-0 sm:block">₹10,000</span>
+                                    <span class="text-2xl sm:text-3xl font-black text-amber-600 dark:text-amber-400 drop-shadow-sm">₹9,000</span>
+                                </div>
+                            </div>
+
+                            <!-- 12 Months Yearly Pass -->
+                            <div class="p-4 rounded-2xl bg-white/70 dark:bg-[#1a1b24] border border-amber-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:border-amber-500 transition-colors shadow-md">
+                                <div>
+                                    <h4 class="font-black text-base sm:text-lg text-slate-900 dark:text-white drop-shadow-sm">12 Months Yearly Pass</h4>
+                                    <p class="text-xs text-slate-700 dark:text-amber-100/90 font-bold">All Access VIP Membership + Free Personal Diet Chart</p>
+                                </div>
+                                <div class="text-left sm:text-right flex items-center sm:block gap-3">
+                                    <span class="text-slate-500 dark:text-amber-300/60 line-through text-sm mr-2 sm:mr-0 sm:block">₹18,000</span>
+                                    <span class="text-2xl sm:text-3xl font-black text-amber-600 dark:text-amber-400 drop-shadow-sm">₹16,200</span>
+                                </div>
+                            </div>
                         </div>
-                        <p class="text-slate-500 dark:text-gray-400 text-xs leading-relaxed border-t border-gray-200 dark:border-white/10 pt-4">Maximum value pack. VIP priority coaching, free assessment, and full perk suite.</p>
+
+                        <!-- MODIFIED FOOTER WITH CLAIM DISCOUNT BUTTON -->
+                        <div class="pt-6 border-t border-amber-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <button onclick="flipMenuPage(2)" class="gold-bg text-black font-extrabold px-6 py-3 rounded-xl hover:scale-105 transition-all flex items-center justify-center gap-2 text-sm shadow-lg gold-glow w-full sm:w-auto">
+                                <span>FLIP TO PERSONAL TRAINING</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                            
+                            <div class="flex items-center gap-4 w-full sm:w-auto justify-end">
+                                <span class="hidden md:inline-block text-xs font-bold text-amber-700 dark:text-amber-300 tracking-wider whitespace-nowrap">PAGE 1 OF 2</span>
+                                <a href="https://wa.me/919938581222?text=Hi%20Commune%20Fitness,%20I%20want%20to%20claim%20my%20discount!" target="_blank" class="group animate-shine relative inline-flex items-center justify-center px-6 py-3 font-black text-amber-800 dark:text-amber-300 bg-transparent border-2 border-amber-500 rounded-xl hover:bg-amber-500 hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(245,158,11,0.3)] hover:shadow-[0_0_25px_rgba(245,158,11,0.6)] w-full sm:w-auto overflow-hidden">
+                                    <span class="relative flex items-center gap-2">
+                                        <i data-lucide="tag" class="w-5 h-5 group-hover:scale-110 group-hover:rotate-12 transition-transform"></i>
+                                        CLAIM DISCOUNT
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <a href="https://wa.me/919938581222?text=Hi%20Commune%20Fitness,%20I%20want%20to%20enroll%20in%20the%20Yearly%20Plan!" target="_blank" class="mt-8 w-full py-3 rounded-xl border border-yellow-500/40 text-yellow-600 dark:text-yellow-400 font-bold text-center block group-hover:bg-yellow-500 group-hover:text-black transition-all">
-                        Claim Discount
-                    </a>
+
+                    <!-- PAGE 2: SPECIAL TRAINING MENU (Personal Coaching & Recovery Packages) -->
+                    <div id="page-2" class="space-y-6 hidden">
+                        <div class="text-center pb-4 border-b border-amber-500/30">
+                            <h3 class="text-2xl sm:text-3xl font-black tracking-wider text-amber-600 dark:text-amber-400 uppercase drop-shadow-md">Special Training Menu</h3>
+                            <p class="text-xs uppercase tracking-widest text-slate-600 dark:text-amber-200/80 font-bold mt-1">Personal Coaching & Recovery Packages</p>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Personal Training (12 Sessions) -->
+                            <div class="p-4 rounded-2xl bg-white/70 dark:bg-[#1a1b24] border border-amber-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:border-amber-500 transition-colors shadow-md">
+                                <div>
+                                    <h4 class="font-black text-base sm:text-lg text-slate-900 dark:text-white drop-shadow-sm">Personal Training (12 Sessions)</h4>
+                                    <p class="text-xs text-slate-700 dark:text-amber-100/90 font-bold">1-on-1 Dedicated Elite Personal Coach</p>
+                                </div>
+                                <div class="text-left sm:text-right flex items-center sm:block gap-3">
+                                    <span class="text-2xl sm:text-3xl font-black text-amber-600 dark:text-amber-400 drop-shadow-sm">₹6,000</span>
+                                </div>
+                            </div>
+
+                            <!-- Steam & Sauna Pass (Monthly) -->
+                            <div class="p-4 rounded-2xl bg-white/70 dark:bg-[#1a1b24] border border-amber-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:border-amber-500 transition-colors shadow-md">
+                                <div>
+                                    <h4 class="font-black text-base sm:text-lg text-slate-900 dark:text-white drop-shadow-sm">Steam & Sauna Pass (Monthly)</h4>
+                                    <p class="text-xs text-slate-700 dark:text-amber-100/90 font-bold">Detox & Recovery Unlimited Access</p>
+                                </div>
+                                <div class="text-left sm:text-right flex items-center sm:block gap-3">
+                                    <span class="text-2xl sm:text-3xl font-black text-amber-600 dark:text-amber-400 drop-shadow-sm">₹1,500</span>
+                                </div>
+                            </div>
+
+                            <!-- Diet & Nutrition Consultation -->
+                            <div class="p-4 rounded-2xl bg-white/70 dark:bg-[#1a1b24] border border-amber-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:border-amber-500 transition-colors shadow-md">
+                                <div>
+                                    <h4 class="font-black text-base sm:text-lg text-slate-900 dark:text-white drop-shadow-sm">Diet & Nutrition Consultation</h4>
+                                    <p class="text-xs text-slate-700 dark:text-amber-100/90 font-bold">Custom Macro Plan & Body Composition Analysis</p>
+                                </div>
+                                <div class="text-left sm:text-right flex items-center sm:block gap-3">
+                                    <span class="text-2xl sm:text-3xl font-black text-amber-600 dark:text-amber-400 drop-shadow-sm">₹1,000</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MODIFIED FOOTER WITH CLAIM DISCOUNT BUTTON (ADJACENT) -->
+                        <div class="pt-6 border-t border-amber-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <button onclick="flipMenuPage(1)" class="gold-bg text-black font-extrabold px-6 py-3 rounded-xl hover:scale-105 transition-all flex items-center justify-center gap-2 text-sm shadow-lg gold-glow w-full sm:w-auto">
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                <span>FLIP TO RATES</span>
+                            </button>
+
+                            <div class="flex items-center gap-4 w-full sm:w-auto justify-end">
+                                <a href="https://wa.me/919938581222?text=Hi%20Commune%20Fitness,%20I%20want%20to%20claim%20my%20VIP%20Offer!" target="_blank" class="group animate-shine relative inline-flex items-center justify-center px-6 py-3 font-black text-amber-800 dark:text-amber-300 bg-transparent border-2 border-amber-500 rounded-xl hover:bg-amber-500 hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(245,158,11,0.3)] hover:shadow-[0_0_25px_rgba(245,158,11,0.6)] w-full sm:w-auto overflow-hidden">
+                                    <span class="relative flex items-center gap-2">
+                                        <i data-lucide="award" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                                        CLAIM VIP OFFER
+                                    </span>
+                                </a>
+                                <span class="hidden md:inline-block text-xs font-bold text-amber-700 dark:text-amber-300 tracking-wider whitespace-nowrap">PAGE 2 OF 2</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <div class="card-glass rounded-3xl p-8 border border-gray-200 dark:border-white/10 bg-white/60 dark:bg-black/40">
-                <h4 class="text-center font-bold text-lg text-yellow-600 dark:text-yellow-400 mb-6 uppercase tracking-wider">Included Free With Every Membership Plan</h4>
+            <div class="card-glass rounded-3xl p-8 border border-amber-500/30 bg-white/60 dark:bg-black/40">
+                <h4 class="text-center font-bold text-lg text-amber-600 dark:text-amber-400 mb-6 uppercase tracking-wider">Included Free With Every Membership Plan</h4>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                    <div class="p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 flex flex-col items-center justify-center">
-                        <i data-lucide="award" class="w-8 h-8 text-yellow-500 mb-2"></i>
-                        <span class="font-bold text-sm">Certified Trainers</span>
+                    <div class="p-4 rounded-2xl bg-amber-500/5 dark:bg-white/5 border border-amber-500/20 flex flex-col items-center justify-center">
+                        <i data-lucide="award" class="w-8 h-8 text-amber-500 mb-2"></i>
+                        <span class="font-bold text-sm text-slate-800 dark:text-gray-200">Certified Trainers</span>
                     </div>
-                    <div class="p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 flex flex-col items-center justify-center">
-                        <i data-lucide="users" class="w-8 h-8 text-yellow-500 mb-2"></i>
-                        <span class="font-bold text-sm">Zumba & Yoga Classes</span>
+                    <div class="p-4 rounded-2xl bg-amber-500/5 dark:bg-white/5 border border-amber-500/20 flex flex-col items-center justify-center">
+                        <i data-lucide="users" class="w-8 h-8 text-amber-500 mb-2"></i>
+                        <span class="font-bold text-sm text-slate-800 dark:text-gray-200">Zumba & Yoga Classes</span>
                     </div>
-                    <div class="p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 flex flex-col items-center justify-center">
-                        <i data-lucide="zap" class="w-8 h-8 text-yellow-500 mb-2"></i>
-                        <span class="font-bold text-sm">CrossFit & Strength</span>
+                    <div class="p-4 rounded-2xl bg-amber-500/5 dark:bg-white/5 border border-amber-500/20 flex flex-col items-center justify-center">
+                        <i data-lucide="zap" class="w-8 h-8 text-amber-500 mb-2"></i>
+                        <span class="font-bold text-sm text-slate-800 dark:text-gray-200">CrossFit & Strength</span>
                     </div>
-                    <div class="p-4 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 flex flex-col items-center justify-center">
-                        <i data-lucide="shield-check" class="w-8 h-8 text-yellow-500 mb-2"></i>
-                        <span class="font-bold text-sm">Powerlifting Zone</span>
+                    <div class="p-4 rounded-2xl bg-amber-500/5 dark:bg-white/5 border border-amber-500/20 flex flex-col items-center justify-center">
+                        <i data-lucide="shield-check" class="w-8 h-8 text-amber-500 mb-2"></i>
+                        <span class="font-bold text-sm text-slate-800 dark:text-gray-200">Powerlifting Zone</span>
                     </div>
                 </div>
             </div>
@@ -492,21 +746,21 @@
     </section>
 
     <!-- Interactive BMI Calculator Section -->
-    <section id="calculator" class="py-20 bg-slate-100/50 dark:bg-black/40 border-y border-gray-200 dark:border-gray-800/80">
+    <section id="calculator" class="py-20 bg-amber-50/20 dark:bg-black/40 border-y border-amber-500/20">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="card-glass p-8 sm:p-12 rounded-3xl border border-yellow-500/30 relative overflow-hidden">
+            <div class="card-glass p-8 sm:p-12 rounded-3xl border border-amber-500/40 relative overflow-hidden">
                 <div class="text-center mb-10">
                     <h2 class="text-3xl font-black text-slate-900 dark:text-white">CHECK YOUR <span class="gold-gradient-text">BMI INDEX</span></h2>
-                    <p class="text-slate-600 dark:text-gray-400 text-sm mt-2">Calculate your Body Mass Index quickly before starting your workout journey.</p>
+                    <p class="text-slate-700 dark:text-amber-200/80 text-sm mt-2 font-medium">Calculate your Body Mass Index quickly before starting your workout journey.</p>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 dark:text-gray-300 uppercase mb-2">Weight (KG)</label>
-                        <input type="number" id="bmi-weight" placeholder="e.g. 70" class="w-full bg-slate-50 dark:bg-black/60 border border-gray-300 dark:border-gray-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-yellow-500">
+                        <label class="block text-xs font-bold text-amber-700 dark:text-amber-400 uppercase mb-2">Weight (KG)</label>
+                        <input type="number" id="bmi-weight" placeholder="e.g. 70" class="w-full bg-white/80 dark:bg-black/60 border border-amber-500/30 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-amber-500">
                     </div>
                     <div>
-                        <label class="block text-xs font-bold text-slate-700 dark:text-gray-300 uppercase mb-2">Height (CM)</label>
-                        <input type="number" id="bmi-height" placeholder="e.g. 175" class="w-full bg-slate-50 dark:bg-black/60 border border-gray-300 dark:border-gray-700 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-yellow-500">
+                        <label class="block text-xs font-bold text-amber-700 dark:text-amber-400 uppercase mb-2">Height (CM)</label>
+                        <input type="number" id="bmi-height" placeholder="e.g. 175" class="w-full bg-white/80 dark:bg-black/60 border border-amber-500/30 rounded-xl px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:border-amber-500">
                     </div>
                 </div>
                 <button onclick="calculateBMI()" class="w-full gold-bg text-black font-extrabold py-4 rounded-xl mt-6 hover:scale-[1.01] transition-transform gold-glow">
@@ -517,12 +771,12 @@
         </div>
     </section>
 
-    <!-- AUTOMATIC HORIZONTAL SCROLLING GALLERY SECTION WITH STYLISH INTERACTIVE MAXIMIZE LIGHTBOX -->
-    <section id="gallery" class="py-24 overflow-hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
+    <!-- 3D CIRCULAR ROTATING LOOP GALLERY SECTION -->
+    <section id="gallery" class="py-24 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
             <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
                 <div>
-                    <h2 class="text-xs uppercase tracking-widest font-extrabold text-yellow-500 mb-2">Visual Tour</h2>
+                    <h2 class="text-xs uppercase tracking-widest font-extrabold text-amber-600 dark:text-amber-400 mb-2">Visual Tour</h2>
                     <p class="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white">ORIGINAL GYM GALLERY</p>
                 </div>
                 <a href="https://www.google.com/maps/place/Commune+Fitness/@20.4686984,85.8960583,3a,75y,90t/data=!3m8!1e2!3m6!1sCIABIhDQzphCdgxllAvhCPJCyluJ!2e10!3e12!6shttps:%2F%2Flh3.googleusercontent.com%2Fgps-cs-s%2FAHRPTWm3pVGu-j4_O_73VBpffAJdxKyl8FM609zA45kLaFGNbHMQ8NglMcDn5nLnCjXaLTGEW-aymuGrM4eXjJro4bEo0Ex6F4XfSeiiM8Ks6Tjx7WMDCJkiPCCa_W2x9w192bT6Z-T8Cu6HjKoP%3Dw395-h298-k-no!7i4080!8i3072!4m9!3m8!1s0x3a190dac42593da3:0xcd0de8e5a95ee3ab!8m2!3d20.4686984!4d85.8960583!10e5!14m1!1BCgIgAQ!16s%2Fg%2F11zcp4w83_?entry=ttu&g_ep=EgoyMDI2MDgxNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="gold-bg text-black font-bold px-6 py-3 rounded-xl hover:scale-105 transition-all flex items-center gap-2 text-sm shadow-lg gold-glow z-10 relative">
@@ -531,108 +785,54 @@
             </div>
         </div>
 
-        <!-- Continuous Infinite Animated Marquee Container for Round Original Photos -->
-        <div class="marquee-container py-6">
-            <div class="marquee-content flex items-center gap-6">
-                <div onclick="openGalleryModal('3.png', 'Main Training Floor & Equipment')" class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl cursor-pointer">
-                    <img src="3.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Heavy Duty Zone">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-sm text-center px-4">
-                        <i data-lucide="maximize-2" class="w-8 h-8 mb-2 text-yellow-400"></i>
+        <div class="circle-gallery-viewport">
+            <div class="circle-gallery-ring" id="circle-gallery-ring">
+                <div onclick="openGalleryModal('3.png', 'Main Training Floor & Equipment')" class="circle-card group" style="transform: rotateY(0deg) translateZ(360px);">
+                    <img src="3.png" alt="Heavy Duty Zone">
+                    <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-xs text-center p-4">
+                        <span class="text-amber-400 font-extrabold text-sm mb-1">001</span>
                         <span>Main Training Floor & Equipment</span>
                     </div>
                 </div>
-                <div onclick="openGalleryModal('4.png', 'Free Weight & Pillar Detailing')" class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl cursor-pointer">
-                    <img src="4.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Free Weight Dumbbells">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-sm text-center px-4">
-                        <i data-lucide="maximize-2" class="w-8 h-8 mb-2 text-yellow-400"></i>
+                <div onclick="openGalleryModal('4.png', 'Free Weight & Pillar Detailing')" class="circle-card group" style="transform: rotateY(51.4deg) translateZ(360px);">
+                    <img src="4.png" alt="Free Weight Dumbbells">
+                    <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-xs text-center p-4">
+                        <span class="text-amber-400 font-extrabold text-sm mb-1">002</span>
                         <span>Free Weight & Pillar Detailing</span>
                     </div>
                 </div>
-                <div onclick="openGalleryModal('5.png', 'Treadmill Row & Zen Decor')" class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl cursor-pointer">
-                    <img src="5.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Cardio Setup">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-sm text-center px-4">
-                        <i data-lucide="maximize-2" class="w-8 h-8 mb-2 text-yellow-400"></i>
+                <div onclick="openGalleryModal('5.png', 'Treadmill Row & Zen Decor')" class="circle-card group" style="transform: rotateY(102.8deg) translateZ(360px);">
+                    <img src="5.png" alt="Cardio Setup">
+                    <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-xs text-center p-4">
+                        <span class="text-amber-400 font-extrabold text-sm mb-1">003</span>
                         <span>Treadmill Row & Zen Decor</span>
                     </div>
                 </div>
-                <div onclick="openGalleryModal('6.png', 'Life Fitness Workout Monitoring')" class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl cursor-pointer">
-                    <img src="6.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Smart Tech">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-sm text-center px-4">
-                        <i data-lucide="maximize-2" class="w-8 h-8 mb-2 text-yellow-400"></i>
+                <div onclick="openGalleryModal('6.png', 'Life Fitness Workout Monitoring')" class="circle-card group" style="transform: rotateY(154.2deg) translateZ(360px);">
+                    <img src="6.png" alt="Smart Tech">
+                    <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-xs text-center p-4">
+                        <span class="text-amber-400 font-extrabold text-sm mb-1">004</span>
                         <span>Life Fitness Workout Monitoring</span>
                     </div>
                 </div>
-                <div onclick="openGalleryModal('7.png', 'Heart Rate & Calorie Analytics')" class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl cursor-pointer">
-                    <img src="7.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Tracking">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-sm text-center px-4">
-                        <i data-lucide="maximize-2" class="w-8 h-8 mb-2 text-yellow-400"></i>
+                <div onclick="openGalleryModal('7.png', 'Heart Rate & Calorie Analytics')" class="circle-card group" style="transform: rotateY(205.6deg) translateZ(360px);">
+                    <img src="7.png" alt="Tracking">
+                    <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-xs text-center p-4">
+                        <span class="text-amber-400 font-extrabold text-sm mb-1">005</span>
                         <span>Heart Rate & Calorie Analytics</span>
                     </div>
                 </div>
-                <div onclick="openGalleryModal('8.png', 'Commune Fitness Family')" class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl cursor-pointer">
-                    <img src="8.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Community">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-sm text-center px-4">
-                        <i data-lucide="maximize-2" class="w-8 h-8 mb-2 text-yellow-400"></i>
+                <div onclick="openGalleryModal('8.png', 'Commune Fitness Family')" class="circle-card group" style="transform: rotateY(257deg) translateZ(360px);">
+                    <img src="8.png" alt="Community">
+                    <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-xs text-center p-4">
+                        <span class="text-amber-400 font-extrabold text-sm mb-1">006</span>
                         <span>Commune Fitness Family</span>
                     </div>
                 </div>
-                <div onclick="openGalleryModal('9.png', 'Rex Plaza 4th Floor')" class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl cursor-pointer">
-                    <img src="9.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Location">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-sm text-center px-4">
-                        <i data-lucide="maximize-2" class="w-8 h-8 mb-2 text-yellow-400"></i>
-                        <span>Rex Plaza 4th Floor</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Duplicate Set for Seamless Loop -->
-            <div class="marquee-content flex items-center gap-6" aria-hidden="true">
-                <div onclick="openGalleryModal('3.png', 'Main Training Floor & Equipment')" class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl cursor-pointer">
-                    <img src="3.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Heavy Duty Zone">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-sm text-center px-4">
-                        <i data-lucide="maximize-2" class="w-8 h-8 mb-2 text-yellow-400"></i>
-                        <span>Main Training Floor & Equipment</span>
-                    </div>
-                </div>
-                <div onclick="openGalleryModal('4.png', 'Free Weight & Pillar Detailing')" class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl cursor-pointer">
-                    <img src="4.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Free Weight Dumbbells">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-sm text-center px-4">
-                        <i data-lucide="maximize-2" class="w-8 h-8 mb-2 text-yellow-400"></i>
-                        <span>Free Weight & Pillar Detailing</span>
-                    </div>
-                </div>
-                <div onclick="openGalleryModal('5.png', 'Treadmill Row & Zen Decor')" class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl cursor-pointer">
-                    <img src="5.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Cardio Setup">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-sm text-center px-4">
-                        <i data-lucide="maximize-2" class="w-8 h-8 mb-2 text-yellow-400"></i>
-                        <span>Treadmill Row & Zen Decor</span>
-                    </div>
-                </div>
-                <div onclick="openGalleryModal('6.png', 'Life Fitness Workout Monitoring')" class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl cursor-pointer">
-                    <img src="6.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Smart Tech">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-sm text-center px-4">
-                        <i data-lucide="maximize-2" class="w-8 h-8 mb-2 text-yellow-400"></i>
-                        <span>Life Fitness Workout Monitoring</span>
-                    </div>
-                </div>
-                <div onclick="openGalleryModal('7.png', 'Heart Rate & Calorie Analytics')" class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl cursor-pointer">
-                    <img src="7.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Tracking">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-sm text-center px-4">
-                        <i data-lucide="maximize-2" class="w-8 h-8 mb-2 text-yellow-400"></i>
-                        <span>Heart Rate & Calorie Analytics</span>
-                    </div>
-                </div>
-                <div onclick="openGalleryModal('8.png', 'Commune Fitness Family')" class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl cursor-pointer">
-                    <img src="8.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Community">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-sm text-center px-4">
-                        <i data-lucide="maximize-2" class="w-8 h-8 mb-2 text-yellow-400"></i>
-                        <span>Commune Fitness Family</span>
-                    </div>
-                </div>
-                <div onclick="openGalleryModal('9.png', 'Rex Plaza 4th Floor')" class="w-72 h-72 rounded-full overflow-hidden card-glass border-4 border-[#85583D] group relative flex-shrink-0 transition-transform duration-500 hover:scale-110 shadow-xl cursor-pointer">
-                    <img src="9.png" class="w-full h-full object-cover group-hover:scale-125 transition duration-700" alt="Location">
-                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-sm text-center px-4">
-                        <i data-lucide="maximize-2" class="w-8 h-8 mb-2 text-yellow-400"></i>
+                <div onclick="openGalleryModal('9.png', 'Rex Plaza 4th Floor')" class="circle-card group" style="transform: rotateY(308.4deg) translateZ(360px);">
+                    <img src="9.png" alt="Location">
+                    <div class="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white font-bold text-xs text-center p-4">
+                        <span class="text-amber-400 font-extrabold text-sm mb-1">007</span>
                         <span>Rex Plaza 4th Floor</span>
                     </div>
                 </div>
@@ -642,131 +842,203 @@
 
     <!-- STYLISH GALLERY MAXIMIZED MODAL LIGHTBOX -->
     <div id="gallery-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 hidden transition-all duration-300">
-        <div class="relative max-w-5xl w-full card-glass p-3 sm:p-4 rounded-3xl border border-yellow-500/50 shadow-2xl flex flex-col items-center overflow-hidden">
-            <!-- Close Button -->
-            <button onclick="closeGalleryModal()" class="absolute top-4 right-4 z-20 p-2.5 rounded-full card-glass border border-white/20 text-white hover:text-yellow-400 hover:scale-110 transition-all shadow-lg">
+        <div class="relative max-w-5xl w-full card-glass p-3 sm:p-4 rounded-3xl border border-amber-500/50 shadow-2xl flex flex-col items-center overflow-hidden">
+            <button onclick="closeGalleryModal()" class="absolute top-4 right-4 z-20 p-2.5 rounded-full card-glass border border-amber-500/30 text-white hover:text-amber-400 hover:scale-110 transition-all shadow-lg">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
-            <!-- Image Frame -->
             <div class="w-full max-h-[78vh] rounded-2xl overflow-hidden flex items-center justify-center bg-black/60 relative group">
                 <img id="gallery-modal-img" src="" alt="Maximized View" class="max-h-[78vh] w-auto object-contain rounded-xl shadow-2xl transition-transform duration-300">
             </div>
-            <!-- Image Title & Caption Bar -->
             <div class="mt-4 flex flex-col sm:flex-row items-center justify-between w-full px-4 gap-2">
                 <div class="flex items-center gap-3">
-                    <span class="w-3 h-3 rounded-full bg-yellow-500 animate-pulse"></span>
+                    <span class="w-3 h-3 rounded-full bg-amber-500 animate-pulse"></span>
                     <h4 id="gallery-modal-title" class="text-base sm:text-lg font-black tracking-wide text-slate-900 dark:text-white uppercase"></h4>
                 </div>
-                <span class="text-xs font-semibold px-3 py-1 rounded-full card-glass border border-yellow-500/30 text-yellow-600 dark:text-yellow-400">
+                <span class="text-xs font-semibold px-3 py-1 rounded-full card-glass border border-amber-500/30 text-amber-700 dark:text-amber-400">
                     Commune Fitness Exclusive Tour
                 </span>
             </div>
         </div>
     </div>
 
+    <!-- NEW STYLISH FREQUENTLY ASKED QUESTIONS (FAQ) SECTION -->
+    <section id="faq" class="py-24 bg-amber-50/40 dark:bg-black/60 border-y border-amber-500/20 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <span class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-amber-500/20 text-amber-700 dark:text-amber-400 border border-amber-500/30 inline-block mb-3">
+                    Got Questions?
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white uppercase tracking-tight">
+                    Frequently Asked <span class="gold-gradient-text">Questions</span>
+                </h2>
+                <p class="text-slate-700 dark:text-gray-300 text-sm sm:text-base mt-3 font-medium">
+                    Everything you need to know about joining Commune Fitness at Rex Plaza, Kataka.
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="card-glass rounded-2xl border border-amber-500/30 overflow-hidden transition-all duration-300 shadow-md">
+                    <button onclick="toggleFaq(1)" class="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none">
+                        <span class="font-bold text-base sm:text-lg text-slate-900 dark:text-white flex items-center gap-3">
+                            <i data-lucide="help-circle" class="w-5 h-5 text-amber-500 flex-shrink-0"></i>
+                            Where is Commune Fitness located?
+                        </span>
+                        <i id="faq-icon-1" data-lucide="chevron-down" class="w-5 h-5 text-amber-500 transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-content-1" class="hidden px-6 pb-6 text-sm text-slate-700 dark:text-gray-300 font-medium leading-relaxed border-t border-amber-500/20 pt-4">
+                        We are conveniently located at College Square, 4th Floor, Rex Plaza, Ice Factory Road, Kataka, Odisha 753003[cite: 1]. Easily accessible with dedicated parking and elevator facilities.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="card-glass rounded-2xl border border-amber-500/30 overflow-hidden transition-all duration-300 shadow-md">
+                    <button onclick="toggleFaq(2)" class="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none">
+                        <span class="font-bold text-base sm:text-lg text-slate-900 dark:text-white flex items-center gap-3">
+                            <i data-lucide="help-circle" class="w-5 h-5 text-amber-500 flex-shrink-0"></i>
+                            What are the gym operating hours?
+                        </span>
+                        <i id="faq-icon-2" data-lucide="chevron-down" class="w-5 h-5 text-amber-500 transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-content-2" class="hidden px-6 pb-6 text-sm text-slate-700 dark:text-gray-300 font-medium leading-relaxed border-t border-amber-500/20 pt-4">
+                        We are open daily! Morning session runs until 12:00 PM, and our evening session reopens at 4:00 PM[cite: 1] to accommodate your busy schedule.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="card-glass rounded-2xl border border-amber-500/30 overflow-hidden transition-all duration-300 shadow-md">
+                    <button onclick="toggleFaq(3)" class="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none">
+                        <span class="font-bold text-base sm:text-lg text-slate-900 dark:text-white flex items-center gap-3">
+                            <i data-lucide="help-circle" class="w-5 h-5 text-amber-500 flex-shrink-0"></i>
+                            Are personal trainers and group classes included?
+                        </span>
+                        <i id="faq-icon-3" data-lucide="chevron-down" class="w-5 h-5 text-amber-500 transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-content-3" class="hidden px-6 pb-6 text-sm text-slate-700 dark:text-gray-300 font-medium leading-relaxed border-t border-amber-500/20 pt-4">
+                        Yes! Every membership plan includes access to certified trainers, Zumba & Yoga classes, CrossFit & Strength conditioning, and our Powerlifting zone.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="card-glass rounded-2xl border border-amber-500/30 overflow-hidden transition-all duration-300 shadow-md">
+                    <button onclick="toggleFaq(4)" class="w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none">
+                        <span class="font-bold text-base sm:text-lg text-slate-900 dark:text-white flex items-center gap-3">
+                            <i data-lucide="help-circle" class="w-5 h-5 text-amber-500 flex-shrink-0"></i>
+                            Is there steam and sauna recovery available?
+                        </span>
+                        <i id="faq-icon-4" data-lucide="chevron-down" class="w-5 h-5 text-amber-500 transition-transform duration-300"></i>
+                    </button>
+                    <div id="faq-content-4" class="hidden px-6 pb-6 text-sm text-slate-700 dark:text-gray-300 font-medium leading-relaxed border-t border-amber-500/20 pt-4">
+                        Absolutely. We feature a luxury sauna and steam recovery suite designed to help you relax, detoxify, and accelerate post-workout muscle recovery.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Google Map Reviews Section -->
-    <section id="reviews" class="py-24 bg-slate-100/50 dark:bg-black/50 border-t border-gray-200 dark:border-gray-800/80 overflow-hidden">
+    <section id="reviews" class="py-24 bg-amber-50/20 dark:bg-black/50 border-t border-amber-500/20 overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center justify-between mb-16 gap-6 z-10 relative">
                 <div>
-                    <h2 class="text-xs uppercase tracking-widest font-extrabold text-yellow-500 mb-2">Member Testimonials</h2>
+                    <h2 class="text-xs uppercase tracking-widest font-extrabold text-amber-600 dark:text-amber-400 mb-2">Member Testimonials</h2>
                     <p class="text-3xl sm:text-5xl font-black text-slate-900 dark:text-white">GOOGLE MAP REVIEWS</p>
                 </div>
-                <a href="https://www.google.com/maps/place/Commune+Fitness/@20.4686984,85.8934834,17z/data=!4m8!3m7!1s0x3a190dac42593da3:0xcd0de8e5a95ee3ab!8m2!3d20.4686984!4d85.8960583!9m1!1b1!16s%2Fg%2F11zcp4w83_?entry=ttu&g_ep=EgoyMDI2MDgxNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="card-glass text-slate-900 dark:text-white font-bold px-6 py-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-all flex items-center gap-2 text-sm border border-yellow-500/30">
-                    <i data-lucide="star" class="w-5 h-5 text-yellow-500 fill-yellow-500"></i> Read All Reviews on Google Maps
+                <a href="https://www.google.com/maps/place/Commune+Fitness/@20.4686984,85.8934834,17z/data=!4m8!3m7!1s0x3a190dac42593da3:0xcd0de8e5a95ee3ab!8m2!3d20.4686984!4d85.8960583!9m1!1b1!16s%2Fg%2F11zcp4w83_?entry=ttu&g_ep=EgoyMDI2MDgxNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="card-glass text-slate-900 dark:text-white font-bold px-6 py-3 rounded-xl hover:bg-amber-500/10 transition-all flex items-center gap-2 text-sm border border-amber-500/30">
+                    <i data-lucide="star" class="w-5 h-5 text-amber-500 fill-amber-500"></i> Read All Reviews on Google Maps
                 </a>
             </div>
         </div>
 
         <div class="marquee-container silver-sweep-container py-4">
             <div class="marquee-content">
-                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-gray-200 dark:border-white/10 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
-                    <div class="flex text-yellow-500 mb-4 text-lg">★★★★★</div>
-                    <p class="text-slate-600 dark:text-gray-300 italic text-sm mb-6 leading-relaxed">"A good training environment along with fully equipped Great place for Work out. Highly recommended in Kataka."</p>
+                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-amber-500/30 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
+                    <div class="flex text-amber-500 mb-4 text-lg">★★★★★</div>
+                    <p class="text-slate-700 dark:text-gray-300 italic text-sm mb-6 leading-relaxed font-medium">"A good training environment along with fully equipped Great place for Work out. Highly recommended in Kataka."</p>
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 font-bold flex items-center justify-center">AM</div>
+                        <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-400 font-bold flex items-center justify-center">AM</div>
                         <div>
                             <div class="font-bold text-slate-900 dark:text-white text-sm">Asrit Mohanty</div>
-                            <div class="text-xs text-slate-500 dark:text-gray-500">Verified Local Guide</div>
+                            <div class="text-xs text-slate-500 dark:text-gray-400">Verified Local Guide</div>
                         </div>
                     </div>
                 </div>
-                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-gray-200 dark:border-white/10 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
-                    <div class="flex text-yellow-500 mb-4 text-lg">★★★★★</div>
-                    <p class="text-slate-600 dark:text-gray-300 italic text-sm mb-6 leading-relaxed">"A great gym with top quality equipment and a very clean environment. The machines are modern and well maintained..."</p>
+                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-amber-500/30 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
+                    <div class="flex text-amber-500 mb-4 text-lg">★★★★★</div>
+                    <p class="text-slate-700 dark:text-gray-300 italic text-sm mb-6 leading-relaxed font-medium">"A great gym with top quality equipment and a very clean environment. The machines are modern and well maintained..."</p>
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 font-bold flex items-center justify-center">SS</div>
+                        <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-400 font-bold flex items-center justify-center">SS</div>
                         <div>
                             <div class="font-bold text-slate-900 dark:text-white text-sm">Sahil Sahoo</div>
-                            <div class="text-xs text-slate-500 dark:text-gray-500">Verified Local Guide</div>
+                            <div class="text-xs text-slate-500 dark:text-gray-400">Verified Local Guide</div>
                         </div>
                     </div>
                 </div>
-                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-gray-200 dark:border-white/10 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
-                    <div class="flex text-yellow-500 mb-4 text-lg">★★★★★</div>
-                    <p class="text-slate-600 dark:text-gray-300 italic text-sm mb-6 leading-relaxed">"Friendly and helpful staff, clean washrooms, and the overall atmosphere is highly motivating for workouts."</p>
+                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-amber-500/30 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
+                    <div class="flex text-amber-500 mb-4 text-lg">★★★★★</div>
+                    <p class="text-slate-700 dark:text-gray-300 italic text-sm mb-6 leading-relaxed font-medium">"Friendly and helpful staff, clean washrooms, and the overall atmosphere is highly motivating for workouts."</p>
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 font-bold flex items-center justify-center">SP</div>
+                        <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-400 font-bold flex items-center justify-center">SP</div>
                         <div>
                             <div class="font-bold text-slate-900 dark:text-white text-sm">Suprava Patra</div>
-                            <div class="text-xs text-slate-500 dark:text-gray-500">Gym Member</div>
+                            <div class="text-xs text-slate-500 dark:text-gray-400">Gym Member</div>
                         </div>
                     </div>
                 </div>
-                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-gray-200 dark:border-white/10 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
-                    <div class="flex text-yellow-500 mb-4 text-lg">★★★★★</div>
-                    <p class="text-slate-600 dark:text-gray-300 italic text-sm mb-6 leading-relaxed">"One of the best premium fitness destinations with excellent recovery zones like steam and sauna."</p>
+                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-amber-500/30 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
+                    <div class="flex text-amber-500 mb-4 text-lg">★★★★★</div>
+                    <p class="text-slate-700 dark:text-gray-300 italic text-sm mb-6 leading-relaxed font-medium">"One of the best premium fitness destinations with excellent recovery zones like steam and sauna."</p>
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 font-bold flex items-center justify-center">RD</div>
+                        <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-400 font-bold flex items-center justify-center">RD</div>
                         <div>
                             <div class="font-bold text-slate-900 dark:text-white text-sm">Rajesh Dash</div>
-                            <div class="text-xs text-slate-500 dark:text-gray-500">Local Guide</div>
+                            <div class="text-xs text-slate-500 dark:text-gray-400">Local Guide</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="marquee-content" aria-hidden="true">
-                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-gray-200 dark:border-white/10 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
-                    <div class="flex text-yellow-500 mb-4 text-lg">★★★★★</div>
-                    <p class="text-slate-600 dark:text-gray-300 italic text-sm mb-6 leading-relaxed">"A good training environment along with fully equipped Great place for Work out. Highly recommended in Kataka."</p>
+                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-amber-500/30 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
+                    <div class="flex text-amber-500 mb-4 text-lg">★★★★★</div>
+                    <p class="text-slate-700 dark:text-gray-300 italic text-sm mb-6 leading-relaxed font-medium">"A good training environment along with fully equipped Great place for Work out. Highly recommended in Kataka."</p>
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 font-bold flex items-center justify-center">AM</div>
+                        <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-400 font-bold flex items-center justify-center">AM</div>
                         <div>
                             <div class="font-bold text-slate-900 dark:text-white text-sm">Asrit Mohanty</div>
-                            <div class="text-xs text-slate-500 dark:text-gray-500">Verified Local Guide</div>
+                            <div class="text-xs text-slate-500 dark:text-gray-400">Verified Local Guide</div>
                         </div>
                     </div>
                 </div>
-                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-gray-200 dark:border-white/10 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
-                    <div class="flex text-yellow-500 mb-4 text-lg">★★★★★</div>
-                    <p class="text-slate-600 dark:text-gray-300 italic text-sm mb-6 leading-relaxed">"A great gym with top quality equipment and a very clean environment. The machines are modern and well maintained..."</p>
+                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-amber-500/30 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
+                    <div class="flex text-amber-500 mb-4 text-lg">★★★★★</div>
+                    <p class="text-slate-700 dark:text-gray-300 italic text-sm mb-6 leading-relaxed font-medium">"A great gym with top quality equipment and a very clean environment. The machines are modern and well maintained..."</p>
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 font-bold flex items-center justify-center">SS</div>
+                        <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-400 font-bold flex items-center justify-center">SS</div>
                         <div>
                             <div class="font-bold text-slate-900 dark:text-white text-sm">Sahil Sahoo</div>
-                            <div class="text-xs text-slate-500 dark:text-gray-500">Verified Local Guide</div>
+                            <div class="text-xs text-slate-500 dark:text-gray-400">Verified Local Guide</div>
                         </div>
                     </div>
                 </div>
-                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-gray-200 dark:border-white/10 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
-                    <div class="flex text-yellow-500 mb-4 text-lg">★★★★★</div>
-                    <p class="text-slate-600 dark:text-gray-300 italic text-sm mb-6 leading-relaxed">"Friendly and helpful staff, clean washrooms, and the overall atmosphere is highly motivating for workouts."</p>
+                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-amber-500/30 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
+                    <div class="flex text-amber-500 mb-4 text-lg">★★★★★</div>
+                    <p class="text-slate-700 dark:text-gray-300 italic text-sm mb-6 leading-relaxed font-medium">"Friendly and helpful staff, clean washrooms, and the overall atmosphere is highly motivating for workouts."</p>
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 font-bold flex items-center justify-center">SP</div>
+                        <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-400 font-bold flex items-center justify-center">SP</div>
                         <div>
                             <div class="font-bold text-slate-900 dark:text-white text-sm">Suprava Patra</div>
-                            <div class="text-xs text-slate-500 dark:text-gray-500">Gym Member</div>
+                            <div class="text-xs text-slate-500 dark:text-gray-400">Gym Member</div>
                         </div>
                     </div>
                 </div>
-                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-gray-200 dark:border-white/10 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
-                    <div class="flex text-yellow-500 mb-4 text-lg">★★★★★</div>
-                    <p class="text-slate-600 dark:text-gray-300 italic text-sm mb-6 leading-relaxed">"One of the best premium fitness destinations with excellent recovery zones like steam and sauna."</p>
+                <div class="w-80 sm:w-96 p-8 rounded-2xl card-glass border border-amber-500/30 flex-shrink-0 shadow-lg relative group transition-transform hover:-translate-y-2">
+                    <div class="flex text-amber-500 mb-4 text-lg">★★★★★</div>
+                    <p class="text-slate-700 dark:text-gray-300 italic text-sm mb-6 leading-relaxed font-medium">"One of the best premium fitness destinations with excellent recovery zones like steam and sauna."</p>
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 font-bold flex items-center justify-center">RD</div>
+                        <div class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-400 font-bold flex items-center justify-center">RD</div>
                         <div>
                             <div class="font-bold text-slate-900 dark:text-white text-sm">Rajesh Dash</div>
-                            <div class="text-xs text-slate-500 dark:text-gray-500">Local Guide</div>
+                            <div class="text-xs text-slate-500 dark:text-gray-400">Local Guide</div>
                         </div>
                     </div>
                 </div>
@@ -774,137 +1046,161 @@
         </div>
     </section>
 
-    <!-- Location & Contact Section -->
+    <!-- Leadership Profile Section with STYLISH & SMOOTH SCROLL MASK EFFECT -->
+    <div id="profile" class="scroll-mask-wrapper">
+        <div class="scroll-mask-sticky">
+            <div class="aperture-overlay" id="aperture-overlay"></div>
+            <div class="scroll-mask-container flex items-center justify-center" id="scroll-mask-container">
+                <section class="w-full h-full py-20 relative bg-slate-900 text-white overflow-hidden flex items-center justify-center">
+                    <canvas id="profile-interactive-bg" class="interactive-canvas"></canvas>
+
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-amber-400 to-transparent shadow-[0_0_20px_#f59e0b] animate-pulse z-20"></div>
+
+                    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+                        <div class="relative rounded-3xl card-glass border border-amber-500/30 p-8 sm:p-12 shadow-2xl overflow-hidden silver-sweep-container bg-black/40">
+                            
+                            <div class="absolute -top-24 -right-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                            <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+                                <div class="lg:col-span-4 flex justify-center">
+                                    <div class="relative group/avatar w-56 h-56 sm:w-64 sm:h-64 rounded-3xl p-1.5 bg-gradient-to-tr from-amber-600 via-yellow-500 to-amber-400 shadow-[0_0_25px_rgba(245,158,11,0.4)]">
+                                        <div class="w-full h-full rounded-[22px] overflow-hidden bg-slate-900 relative">
+                                            <img src="12.png" 
+                                                 alt="Sanjit Kumar Sahoo" 
+                                                 onerror="this.src='12.png'"
+                                                 class="w-full h-full object-cover transition-transform duration-700 hover:scale-110 filter contrast-105 brightness-95" />
+                                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60"></div>
+                                        </div>
+                                        <div class="absolute -bottom-3 -right-3 bg-emerald-500 text-white p-2.5 rounded-2xl shadow-lg border-2 border-slate-900 flex items-center justify-center">
+                                            <i data-lucide="check-circle" class="w-5 h-5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="lg:col-span-8 space-y-5 text-left">
+                                    <div>
+                                        <span class="inline-block px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-black uppercase tracking-wider mb-3">
+                                            22+ Years Global Leadership
+                                        </span>
+                                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
+                                            Sanjit Kumar Sahoo
+                                        </h2>
+                                        <p class="text-amber-400 font-bold text-lg sm:text-xl mt-1">
+                                            Co-Founder & Managing Director
+                                        </p>
+                                    </div>
+
+                                    <div class="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed font-normal">
+                                        <p>
+                                            Sanjit brings more than <strong class="text-amber-300 font-bold">22 years of global leadership experience</strong> in enterprise architecture. A visionary leader driving health, wellness, and community transformation, he has built a trusted ecosystem connecting fitness, lifestyle, and service excellence across Kataka & Bhubaneswar.
+                                        </p>
+                                        <p>
+                                            A forward-thinking entrepreneur, Sanjit Kumar Sahoo leads Commune Fitness Center with a vision to inspire healthier living and stronger communities. His leadership across fitness, food, and healthcare ventures reflects excellence and growth including <strong class="text-amber-300 font-bold">Blast Cafe, Barbeque Nation, and Hospital services</strong>.
+                                        </p>
+                                        <p>
+                                            As Co-Founder and CEO of Commune Fitness Center, Sanjit leads a powerful vision for wellness and community growth, representing a rare blend of entrepreneurship, trust, and long-term value.
+                                        </p>
+                                    </div>
+
+                                    <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                                        <p class="text-xs sm:text-sm italic text-amber-200/80 font-medium">
+                                            “Translating ambitious business visions into scalable technology ecosystems.”
+                                        </p>
+                                        <a href="https://wa.me/918277754614?text=Hi%20Sanjit%20Kumar%20Sahoo,%20I%20am%20reaching%20out%20via%20Commune%20Fitness%20website" 
+                                           target="_blank" 
+                                           class="inline-flex items-center justify-center gap-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.5)] hover:scale-105 transition-all text-sm flex-shrink-0"
+                                           title="Connect with Sanjit Kumar Sahoo on WhatsApp (+91 8277754614)">
+                                            <i data-lucide="message-square" class="w-4 h-4"></i>
+                                            <span>WhatsApp: +91 8277754614</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Location & Contact Section (WITH ENHANCED ZOOM IN/OUT/RESET MAP CONTROLS) -->
     <section id="contact" class="py-24">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div class="space-y-6">
                     <div>
-                        <h2 class="text-xs uppercase tracking-widest font-extrabold text-yellow-500 mb-2">Location & Hours</h2>
+                        <h2 class="text-xs uppercase tracking-widest font-extrabold text-amber-600 dark:text-amber-400 mb-2">Location & Hours</h2>
                         <p class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">VISIT OUR CENTER</p>
                     </div>
                     
                     <div class="space-y-4 pt-2">
-                        <div class="flex items-start gap-4 card-glass p-5 rounded-2xl border border-gray-200 dark:border-white/10">
-                            <i data-lucide="map-pin" class="w-6 h-6 text-yellow-500 flex-shrink-0 mt-1"></i>
+                        <div class="flex items-start gap-4 card-glass p-5 rounded-2xl border border-amber-500/30">
+                            <i data-lucide="map-pin" class="w-6 h-6 text-amber-500 flex-shrink-0 mt-1"></i>
                             <div>
                                 <h4 class="font-bold text-slate-900 dark:text-white text-base">Gym Address</h4>
-                                <p class="text-slate-600 dark:text-gray-400 text-sm mt-1">College Square, 4th floor, Rex Plaza, Ice Factory Road, Kataka, Odisha 753003</p>
+                                <p class="text-slate-700 dark:text-gray-300 text-sm mt-1 font-medium">College Square, 4th floor, Rex Plaza, Ice Factory Road, Kataka, Odisha 753003[cite: 1]</p>
                             </div>
                         </div>
 
-                        <div class="flex items-start gap-4 card-glass p-5 rounded-2xl border border-gray-200 dark:border-white/10">
-                            <i data-lucide="clock" class="w-6 h-6 text-yellow-500 flex-shrink-0 mt-1"></i>
+                        <div class="flex items-start gap-4 card-glass p-5 rounded-2xl border border-amber-500/30">
+                            <i data-lucide="clock" class="w-6 h-6 text-amber-500 flex-shrink-0 mt-1"></i>
                             <div>
                                 <h4 class="font-bold text-slate-900 dark:text-white text-base">Working Hours</h4>
-                                <p class="text-slate-600 dark:text-gray-400 text-sm mt-1">Morning: Open Daily until 12:00 PM</p>
-                                <p class="text-slate-600 dark:text-gray-400 text-sm">Evening: Reopens at 4:00 PM</p>
+                                <p class="text-slate-700 dark:text-gray-300 text-sm mt-1 font-medium">Morning: Open Daily until 12:00 PM[cite: 1]</p>
+                                <p class="text-slate-700 dark:text-gray-300 text-sm font-medium">Evening: Reopens at 4:00 PM[cite: 1]</p>
                             </div>
                         </div>
 
-                        <div class="flex items-start gap-4 card-glass p-5 rounded-2xl border border-gray-200 dark:border-white/10">
-                            <i data-lucide="phone" class="w-6 h-6 text-yellow-500 flex-shrink-0 mt-1"></i>
+                        <div class="flex items-start gap-4 card-glass p-5 rounded-2xl border border-amber-500/30">
+                            <i data-lucide="phone" class="w-6 h-6 text-amber-500 flex-shrink-0 mt-1"></i>
                             <div>
                                 <h4 class="font-bold text-slate-900 dark:text-white text-base">Direct Phone</h4>
-                                <p class="text-slate-600 dark:text-gray-400 text-sm mt-1"><a href="tel:09938581222" class="hover:text-yellow-500">099385 81222</a></p>
+                                <p class="text-slate-700 dark:text-gray-300 text-sm mt-1 font-medium"><a href="tel:09938581222" class="hover:text-amber-500">099385 81222</a>[cite: 1]</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="relative rounded-3xl overflow-hidden card-glass border border-gray-200 dark:border-white/10 min-h-[350px] shadow-2xl group">
-                    <a href="https://www.google.com/maps/place/Commune+Fitness/@20.4686984,85.8934834,17z/data=!3m1!4b1!4m6!3m5!1s0x3a190dac42593da3:0xcd0de8e5a95ee3ab!8m2!3d20.4686984!4d85.8960583!16s%2Fg%2F11zcp4w83_?hl=en&entry=ttu&g_ep=EgoyMDI2MDgxNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="absolute inset-0 z-10 bg-transparent flex items-center justify-center hover:bg-black/20 transition-all cursor-pointer group">
-                        <div class="bg-black/80 backdrop-blur-md text-white font-bold px-6 py-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2 shadow-2xl">
-                            <i data-lucide="external-link" class="w-5 h-5"></i> Open Direct Map
-                        </div>
-                    </a>
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.784532298953!2d85.8810!3d20.4650!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDI3JzU0LjAiTiA4NcKwNTInNTEuNiJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
-                        width="100%" 
-                        height="100%" 
-                        style="border:0; min-height: 400px;" 
-                        allowfullscreen="" 
-                        loading="lazy"
-                        class="relative z-0">
-                    </iframe>
+                <!-- EMBEDDED MAP WITH ZOOM IN / ZOOM OUT / RESET BUTTONS -->
+                <div class="relative rounded-3xl overflow-hidden card-glass border border-amber-500/30 min-h-[400px] shadow-2xl flex flex-col">
+                    <div class="absolute top-4 left-4 z-20 flex gap-2 card-glass p-2 rounded-2xl border border-amber-500/40 shadow-2xl bg-black/70 backdrop-blur-md">
+                        <button onclick="mapZoomIn()" class="p-2.5 rounded-xl gold-bg text-black font-extrabold hover:scale-105 transition-all flex items-center justify-center shadow-md" title="Zoom In">
+                            <i data-lucide="zoom-in" class="w-4 h-4"></i>
+                        </button>
+                        <button onclick="mapZoomOut()" class="p-2.5 rounded-xl card-glass border border-white/20 text-white hover:bg-white/20 transition-all flex items-center justify-center shadow-md" title="Zoom Out">
+                            <i data-lucide="zoom-out" class="w-4 h-4"></i>
+                        </button>
+                        <button onclick="mapResetZoom()" class="p-2.5 rounded-xl card-glass border border-white/25 text-amber-400 hover:bg-amber-500 hover:text-black transition-all flex items-center justify-center shadow-md" title="Reset Zoom">
+                            <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <div class="absolute top-4 right-4 z-20">
+                        <a href="https://www.google.com/maps/place/Commune+Fitness/@20.4686984,85.8934834,17z/data=!3m1!4b1!4m6!3m5!1s0x3a190dac42593da3:0xcd0de8e5a95ee3ab!8m2!3d20.4686984!4d85.8960583!16s%2Fg%2F11zcp4w83_?hl=en&entry=ttu" target="_blank" class="bg-black/80 backdrop-blur-md text-white font-bold px-4 py-2.5 rounded-xl text-xs hover:bg-amber-500 hover:text-black transition-all flex items-center gap-2 shadow-2xl border border-white/10">
+                            <i data-lucide="external-link" class="w-4 h-4"></i> Open in Maps
+                        </a>
+                    </div>
+
+                    <div class="relative w-full h-full flex-grow overflow-hidden bg-slate-900 flex items-center justify-center" style="min-height: 420px;">
+                        <iframe 
+                            id="embedded-google-map"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3738.784532298953!2d85.8810!3d20.4650!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjDCsDI3JzU0LjAiTiA4NcKwNTInNTEuNiJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
+                            width="100%" 
+                            height="100%" 
+                            style="border:0; min-height: 420px; transition: transform 0.4s ease; transform-origin: center;" 
+                            allowfullscreen="" 
+                            loading="lazy"
+                            class="relative z-0">
+                        </iframe>
+                    </div>
                 </div>
             </div>
         </div>
     </section>  
-    
-    <!-- Leadership Profile Section -->
-    <section id="profile" class="py-20 relative bg-slate-900 text-white overflow-hidden border-y border-gray-800">
-        <canvas id="profile-interactive-bg" class="interactive-canvas"></canvas>
 
-        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent shadow-[0_0_20px_#22d3ee] animate-pulse z-20"></div>
-
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-4">
-            <div class="relative rounded-3xl card-glass border border-white/10 p-8 sm:p-12 shadow-2xl overflow-hidden silver-sweep-container bg-black/40">
-                
-                <div class="absolute -top-24 -right-24 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none"></div>
-                <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
-                    <div class="lg:col-span-4 flex justify-center">
-                        <div class="relative group/avatar w-56 h-56 sm:w-64 sm:h-64 rounded-3xl p-1.5 bg-gradient-to-tr from-purple-600 via-cyan-500 to-yellow-500 shadow-[0_0_25px_rgba(34,211,238,0.4)]">
-                            <div class="w-full h-full rounded-[22px] overflow-hidden bg-slate-900 relative">
-                                <img src="12.png" 
-                                     alt="Sanjit Kumar Sahoo" 
-                                     onerror="this.src='12.png'"
-                                     class="w-full h-full object-cover transition-transform duration-700 hover:scale-110 filter contrast-105 brightness-95" />
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60"></div>
-                            </div>
-                            <div class="absolute -bottom-3 -right-3 bg-emerald-500 text-white p-2.5 rounded-2xl shadow-lg border-2 border-slate-900 flex items-center justify-center">
-                                <i data-lucide="check-circle" class="w-5 h-5"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-8 space-y-5 text-left">
-                        <div>
-                            <span class="inline-block px-4 py-1.5 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-xs font-black uppercase tracking-wider mb-3">
-                                22+ Years Global Leadership
-                            </span>
-                            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
-                                Sanjit Kumar Sahoo
-                            </h2>
-                            <p class="text-cyan-400 font-bold text-lg sm:text-xl mt-1">
-                                Co-Founder & Managing Director
-                            </p>
-                        </div>
-
-                        <div class="space-y-4 text-gray-300 text-sm sm:text-base leading-relaxed font-normal">
-                            <p>
-                                Sanjit brings more than <strong class="text-white font-bold">22 years of global leadership experience</strong> in enterprise architecture. A visionary leader driving health, wellness, and community transformation, he has built a trusted ecosystem connecting fitness, lifestyle, and service excellence across Kataka & Bhubaneswar.
-                            </p>
-                            <p>
-                                A forward-thinking entrepreneur, Sanjit Kumar Sahoo leads Commune Fitness Center with a vision to inspire healthier living and stronger communities. His leadership across fitness, food, and healthcare ventures reflects excellence and growth including <strong class="text-white font-bold">Blast Cafe, Barbeque Nation, and Hospital services</strong>.
-                            </p>
-                            <p>
-                                As Co-Founder and CEO of Commune Fitness Center, Sanjit leads a powerful vision for wellness and community growth, representing a rare blend of entrepreneurship, trust, and long-term value.
-                            </p>
-                        </div>
-
-                        <div class="pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                            <p class="text-xs sm:text-sm italic text-gray-400 font-medium">
-                                “Translating ambitious business visions into scalable technology ecosystems.”
-                            </p>
-                            <a href="https://wa.me/918277754614?text=Hi%20Sanjit%20Kumar%20Sahoo,%20I%20am%20reaching%20out%20via%20Commune%20Fitness%20website" 
-                               target="_blank" 
-                               class="inline-flex items-center justify-center gap-2.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-5 py-2.5 rounded-xl shadow-[0_0_15px_rgba(16,185,129,0.5)] hover:scale-105 transition-all text-sm flex-shrink-0"
-                               title="Connect with Sanjit Kumar Sahoo on WhatsApp (+91 8277754614)">
-                                <i data-lucide="message-square" class="w-4 h-4"></i>
-                                <span>WhatsApp: +91 8277754614</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CONTACT SECTION -->
-    <section id="contact" class="py-24 relative light-line-effect">
+    <!-- CONTACT INQUIRY SECTION (EXCLUDED AS REQUESTED) -->
+    <section class="py-24 relative light-line-effect">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div class="space-y-6">
@@ -971,25 +1267,25 @@
     </a>
 
     <!-- Dynamic Footer -->
-    <footer class="border-t border-gray-200 dark:border-gray-800/80 py-12 bg-slate-100 dark:bg-black/80">
+    <footer class="border-t border-amber-500/20 py-12 bg-amber-50/40 dark:bg-black/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-between gap-6 md:flex-row text-center md:text-left">
             <div class="space-y-1">
                 <p class="text-slate-900 dark:text-white font-bold text-lg">Commune Fitness Center</p>
-                <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-slate-500 dark:text-gray-400">
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs text-slate-600 dark:text-gray-400">
                     <span>&copy; 2026 Commune Fitness Kataka. All rights reserved.</span>
-                    <a href="#privacy-modal" onclick="openPrivacyModal(event)" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full card-glass border border-yellow-500/30 text-yellow-600 dark:text-yellow-400 font-medium hover:border-yellow-500 hover:text-yellow-500 transition-all">
+                    <a href="#privacy-modal" onclick="openPrivacyModal(event)" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full card-glass border border-amber-500/30 text-amber-700 dark:text-amber-400 font-bold hover:border-amber-500 hover:text-amber-500 transition-all">
                         <i data-lucide="shield-check" class="w-3.5 h-3.5"></i> Privacy Policy
                     </a>
                 </div>
             </div>
 
             <div class="sk-das-badge px-6 py-3 rounded-2xl flex items-center gap-3">
-                <div class="w-2 h-2 rounded-full bg-yellow-500 animate-ping"></div>
+                <div class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></div>
                 <div class="text-xs">
-                    <span class="text-slate-500 dark:text-gray-400 block font-medium">Website Crafted & Designed By</span>
+                    <span class="text-slate-600 dark:text-gray-400 block font-bold">Website Crafted & Designed By</span>
                     <span class="gold-gradient-text font-black text-sm tracking-wide uppercase block">SK DAS</span>
                 </div>
-                <a href="tel:07798977519" class="ml-2 bg-yellow-500/20 hover:bg-yellow-500 hover:text-black text-yellow-600 dark:text-yellow-400 font-bold px-3 py-1.5 rounded-lg text-xs transition-all">
+                <a href="tel:07798977519" class="ml-2 bg-amber-500/20 hover:bg-amber-500 hover:text-black text-amber-700 dark:text-amber-400 font-bold px-3 py-1.5 rounded-lg text-xs transition-all">
                     Contact Developer 07798977519
                 </a>
             </div>
@@ -998,7 +1294,7 @@
 
     <!-- Stylish Privacy Policy Modal -->
     <div id="privacy-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
-        <div class="card-glass max-w-2xl w-full p-6 sm:p-8 rounded-3xl border border-yellow-500/40 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+        <div class="card-glass max-w-2xl w-full p-6 sm:p-8 rounded-3xl border border-amber-500/40 relative shadow-2xl max-h-[90vh] overflow-y-auto">
             <button onclick="closePrivacyModal()" class="absolute top-5 right-5 p-2 rounded-full card-glass text-slate-400 hover:text-white transition-colors">
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
@@ -1008,9 +1304,9 @@
                 </div>
                 <h3 class="text-2xl font-black text-slate-900 dark:text-white">Privacy Policy & Terms</h3>
             </div>
-            <div class="space-y-4 text-xs sm:text-sm text-slate-600 dark:text-gray-300 leading-relaxed">
+            <div class="space-y-4 text-xs sm:text-sm text-slate-700 dark:text-gray-300 font-medium leading-relaxed">
                 <p><strong>1. Information Collection:</strong> Commune Fitness Center collects personal information provided via inquiries (such as name, email, and phone number) strictly for processing requests and membership updates.</p>
-                <p><strong>2. Data Usage:</strong> We do not sell, rent, or distribute your personal details to third parties. Information shared is used solely to respond to queries and provide gym services.</p>
+                <p><strong>2. Data Usage:</strong> Our platform does not sell, rent, or distribute your personal details to third parties. Information shared is used solely to respond to queries and provide gym services.</p>
                 <p><strong>3. Security:</strong> Standard measures are taken to ensure your personal data remains safe when submitted through our website.</p>
                 <p><strong>4. Consent:</strong> By checking the privacy checkbox, you grant Commune Fitness permission to contact you regarding your submitted inquiry.</p>
             </div>
@@ -1020,10 +1316,139 @@
         </div>
     </div>
 
-    <!-- JavaScript Initializations & Lightbox Modal Logic -->
+    <!-- JavaScript Initializations & Interactive Mechanisms -->
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
+
+        // AUDIO GENERATOR FOR CRISP REALISTIC BOOK FLIP SOUND FX
+        function playFlipSound() {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (!audioCtx) return;
+                
+                const bufferSize = audioCtx.sampleRate * 0.15; // 150ms sound duration
+                const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                const data = buffer.getChannelData(0);
+                
+                for (let i = 0; i < bufferSize; i++) {
+                    // White noise filtered to sound like paper rustle
+                    data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (audioCtx.sampleRate * 0.04));
+                }
+
+                const noise = audioCtx.createBufferSource();
+                noise.buffer = buffer;
+
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'bandpass';
+                filter.frequency.value = 1200;
+                filter.Q.value = 3;
+
+                const gain = audioCtx.createGain();
+                gain.gain.setValueAtTime(0.6, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.15);
+
+                noise.connect(filter);
+                filter.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                noise.start();
+            } catch (e) {
+                // AudioContext auto-play policy fallback
+            }
+        }
+
+        // LUXURY FLIP MENU PAGE NAVIGATION WITH 3D ROTATION & SOUND
+        function flipMenuPage(targetPage) {
+            playFlipSound();
+            const card = document.getElementById('flipbook-page-container');
+            const page1 = document.getElementById('page-1');
+            const page2 = document.getElementById('page-2');
+
+            // Apply 3D rotation flip effect
+            card.style.transform = 'rotateY(90deg) scale(0.95)';
+            card.style.opacity = '0';
+
+            setTimeout(() => {
+                if (targetPage === 2) {
+                    page1.classList.add('hidden');
+                    page2.classList.remove('hidden');
+                } else {
+                    page2.classList.add('hidden');
+                    page1.classList.remove('hidden');
+                }
+
+                // Reset transformation back to front view
+                card.style.transform = 'rotateY(0deg) scale(1)';
+                card.style.opacity = '1';
+                lucide.createIcons();
+            }, 350);
+        }
+
+        // MAP ZOOM CONTROLS LOGIC
+        let currentMapScale = 1;
+        function mapZoomIn() {
+            if (currentMapScale < 1.6) {
+                currentMapScale += 0.2;
+                document.getElementById('embedded-google-map').style.transform = `scale(${currentMapScale})`;
+            }
+        }
+        function mapZoomOut() {
+            if (currentMapScale > 0.8) {
+                currentMapScale -= 0.2;
+                document.getElementById('embedded-google-map').style.transform = `scale(${currentMapScale})`;
+            }
+        }
+        function mapResetZoom() {
+            currentMapScale = 1;
+            document.getElementById('embedded-google-map').style.transform = `scale(1)`;
+        }
+
+        // FAQ ACCORDION TOGGLE
+        function toggleFaq(index) {
+            const content = document.getElementById(`faq-content-${index}`);
+            const icon = document.getElementById(`faq-icon-${index}`);
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                content.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // SMOOTH APERTURE SCROLL MASK EFFECT LOGIC FOR SANJIT KUMAR SAHOO
+        const maskWrapper = document.getElementById('profile');
+        const maskContainer = document.getElementById('scroll-mask-container');
+        const apertureOverlay = document.getElementById('aperture-overlay');
+
+        function updateScrollMask() {
+            if (!maskWrapper || !maskContainer) return;
+            const rect = maskWrapper.getBoundingClientRect();
+            const totalScroll = maskWrapper.offsetHeight - window.innerHeight;
+            
+            if (rect.top <= 0 && rect.bottom >= window.innerHeight) {
+                const scrolled = Math.abs(rect.top);
+                const progress = Math.min(Math.max(scrolled / totalScroll, 0), 1);
+                
+                const radius = 7 + (progress * 133);
+                
+                maskContainer.style.setProperty('--mask-radius', `${radius}%`);
+                if (apertureOverlay) apertureOverlay.style.setProperty('--mask-radius', `${radius}%`);
+            } else if (rect.top > 0) {
+                maskContainer.style.setProperty('--mask-radius', '7%');
+                if (apertureOverlay) apertureOverlay.style.setProperty('--mask-radius', '7%');
+            } else if (rect.bottom < window.innerHeight) {
+                maskContainer.style.setProperty('--mask-radius', '140%');
+                if (apertureOverlay) apertureOverlay.style.setProperty('--mask-radius', '140%');
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            requestAnimationFrame(updateScrollMask);
+        }, { passive: true });
+        updateScrollMask();
 
         // Interactive Lightbox Gallery Modal Functions
         function openGalleryModal(imageSrc, titleText) {
@@ -1040,7 +1465,6 @@
             document.getElementById('gallery-modal').classList.add('hidden');
         }
 
-        // Close gallery modal on pressing Escape key
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeGalleryModal();
@@ -1048,7 +1472,6 @@
             }
         });
 
-        // Close modal when clicking outside content area
         document.getElementById('gallery-modal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeGalleryModal();
@@ -1100,12 +1523,12 @@
 
             if (weight > 0 && height > 0) {
                 const bmi = (weight / (height * height)).toFixed(1);
-                resultDiv.classList.remove('hidden', 'bg-red-500/20', 'bg-green-500/20', 'bg-yellow-500/20', 'text-red-500', 'text-green-500', 'text-yellow-500');
+                resultDiv.classList.remove('hidden', 'bg-red-500/20', 'bg-green-500/20', 'bg-amber-500/20', 'text-red-500', 'text-green-500', 'text-amber-500');
 
                 let category = '';
                 if (bmi < 18.5) {
                     category = 'Underweight';
-                    resultDiv.classList.add('bg-yellow-500/20', 'text-yellow-600', 'dark:text-yellow-400');
+                    resultDiv.classList.add('bg-amber-500/20', 'text-amber-700', 'dark:text-amber-400');
                 } else if (bmi >= 18.5 && bmi <= 24.9) {
                     category = 'Normal Weight';
                     resultDiv.classList.add('bg-green-500/20', 'text-green-600', 'dark:text-green-400');
@@ -1120,7 +1543,7 @@
             }
         }
 
-        // Generic function to initialize interactive background particles
+        // Background Particles
         function initInteractiveCanvas(canvasId, particleCount, linkDist, particleColorHex, lineColorObj) {
             const canvas = document.getElementById(canvasId);
             if (!canvas) return;
@@ -1205,7 +1628,6 @@
             animate();
         }
 
-        // Init Canvases
         initInteractiveCanvas('interactive-bg', 65, 110, '#f59e0b', {r: 245, g: 158, b: 11});
         initInteractiveCanvas('interactive-bg-light', 65, 110, '#d97706', {r: 217, g: 119, b: 6});
         initInteractiveCanvas('profile-interactive-bg', 60, 110, '#22d3ee', {r: 34, g: 211, b: 238});
